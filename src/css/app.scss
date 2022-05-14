@@ -1,1 +1,86 @@
 // app global css in SCSS form
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;1,700&display=swap");
+body {
+  font-family: "Raleway", sans-serif;
+  background: url("/images/bg.png") no-repeat center center/cover;
+}
+
+.heading {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 135px;
+  line-height: 158px;
+  letter-spacing: 0.03em;
+
+  color: #ffffff;
+}
+
+.smaller__heading {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 53px;
+  line-height: 62px;
+  letter-spacing: 0.03em;
+
+  color: #ffffff;
+}
+.container {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1440px;
+}
+.page {
+  background: url("/images/bg.png") no-repeat center center/cover;
+}
+
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+.nav__links .q-tab__indicator {
+  width: 76px;
+  margin: 0 auto;
+  height: 7px;
+}
+.row-posts {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 18px;
+  color: #fff;
+  gap: 1rem;
+}
+
+.row-posts::-webkit-scrollbar {
+  display: none;
+}
+
+.row-poster {
+  width: 100%;
+  object-fit: contain;
+  max-height: 5rem;
+  margin-right: 0.7rem;
+  transition: transform 480ms;
+  cursor: pointer;
+}
+
+.row-poster:hover {
+  transform: scale(1.1);
+}
+
+.large-poster {
+  max-height: 10rem;
+  transition: transform 480ms;
+}
+
+.large-poster:hover {
+  transform: scale(1.12);
+}
+
+.head {
+  border-left: 6px solid #db6c0d;
+}
