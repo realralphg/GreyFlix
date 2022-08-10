@@ -1,7 +1,7 @@
 <template>
   <div class="hero text-center">
     <div class="hero__details">
-      <div class="heading">Welcome to Greyflix</div>
+      <div class="heading">Welcome to GreyBitz</div>
       <p class="smaller__heading">Explore contents and earn on the go!</p>
       <div class="input__wrap">
         <div class="input">

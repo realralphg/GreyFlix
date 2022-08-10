@@ -5,15 +5,27 @@ body {
   background: url("/images/bg.png") no-repeat center center/cover;
 }
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  width: 100%;
+}
+
 .heading {
   font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
-  font-size: 135px;
-  line-height: 158px;
+  // font-size: 135px;
+  font-size: 110px;
+  line-height: 128px;
   letter-spacing: 0.03em;
-
   color: #ffffff;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
 }
 
 .smaller__heading {
@@ -30,6 +42,38 @@ body {
   margin: 0 auto;
   width: 90%;
   max-width: 1440px;
+}
+
+.my_container {
+  margin: 0 auto;
+  width: 60%;
+  max-width: 1440px;
+}
+
+.auth .q-stepper__dot {
+  border: 1px solid #c1272d;
+  background: none;
+}
+.terms {
+  text-transform: capitalize;
+  padding: 0;
+  font-weight: 700;
+}
+.terms::before {
+  box-shadow: none;
+}
+
+.auth .q-stepper__label {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 19.2401px;
+  line-height: 23px;
+  letter-spacing: 0.001em;
+  color: #000000;
+}
+
+.auth .q-stepper__header--border {
+  border-bottom: none;
 }
 .page {
   background: url("/images/bg.png") no-repeat center center/cover;
@@ -83,4 +127,38 @@ a {
 
 .head {
   border-left: 6px solid #db6c0d;
+}
+
+.music_hold .q-badge {
+  background: none !important;
+}
+
+.view {
+  background: #0b0b0b;
+  border: 1.33656px solid #ffffff;
+  border-radius: 20.0483px;
+  padding: 0.55rem;
+  text-transform: capitalize;
+}
+.view::before {
+  box-shadow: none;
+}
+
+.footer .q-item {
+  min-height: 30px !important;
+  padding: 0 !important;
+  color: inherit;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.sign {
+  background: #c1272d;
+  box-shadow: 0px 4.25394px 12.7618px rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 0.75rem;
+  width: 100px;
+}
+
+.connect .q-chip {
+  width: 400px !important;
 }
