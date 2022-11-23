@@ -162,3 +162,9 @@ a {
 .connect .q-chip {
   width: 400px !important;
 }
+
+@media (max-width: 800px) {
+  .connect .q-chip {
+    width: 300px !important;
+  }
+}

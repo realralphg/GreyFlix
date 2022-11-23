@@ -31,9 +31,26 @@
                           standout
                           outlined
                           bottom-slots
-                          v-model="text"
+                          v-model="data.firstname"
                           label="First Name"
                           clearable
+                          name="firstname"
+                        >
+                          <template v-slot:append>
+                            <i class="ri-folder-user-line"></i>
+                          </template>
+                        </q-input>
+                      </div>
+                      <div class="">
+                        <q-input
+                          color="orange"
+                          standout
+                          outlined
+                          bottom-slots
+                          v-model="data.lastname"
+                          label="Last Name"
+                          clearable
+                          name="lastname"
                         >
                           <template v-slot:append>
                             <i class="ri-folder-user-line"></i>
@@ -47,8 +64,9 @@
                           standout
                           outlined
                           bottom-slots
-                          v-model="text"
-                          label="Last Name"
+                          name="phone"
+                          v-model="data.phone"
+                          label="Phone"
                           clearable
                         >
                           <template v-slot:append>
@@ -62,8 +80,9 @@
                           standout
                           outlined
                           bottom-slots
-                          v-model="text"
+                          v-model="data.email"
                           label="Email"
+                          name="email"
                           clearable
                         >
                           <template v-slot:append>
@@ -77,10 +96,26 @@
                           standout
                           outlined
                           bottom-slots
-                          v-model="text"
+                          name="password"
+                          v-model="data.password"
                           label="Create Password"
                           clearable
-                          placeholder="Name"
+                        >
+                          <template v-slot:append>
+                            <i class="ri-lock-password-line"></i>
+                          </template>
+                        </q-input>
+                      </div>
+                      <div class="input-wrap">
+                        <q-input
+                          color="orange"
+                          standout
+                          outlined
+                          bottom-slots
+                          name="password_confirmation"
+                          v-model="data.password_confirmation"
+                          label=" Password Confirmation"
+                          clearable
                         >
                           <template v-slot:append>
                             <i class="ri-lock-password-line"></i>
@@ -225,17 +260,15 @@
               v-if="step > 1"
               flat
               color="primary"
-              @click="$refs.stepper.previous()"
               label="Back"
               class="q-ml-sm"
             />
             <q-btn
-              @click="$refs.stepper.next()"
+              @click="step === 3 ? finish() : $refs.stepper.next()"
               class="continue_btn"
-              :label="step === 3 ? 'Skip for now' : 'Next'"
+              :loading="loading"
+              :label="step === 3 ? 'Register' : 'Next'"
             />
-
-            <!-- <q-btn class="continue_btn" v-if="step === 2" label="Next" /> -->
           </q-stepper-navigation>
         </template>
       </q-stepper>
@@ -271,47 +304,17 @@ export default {
   data() {
     return {
       errors: [],
-      name: "",
-      address: "",
-      business_type: "",
-      state: "",
-      phone: "",
-      city: "",
-      type: "d",
-      images: [],
-      files: [],
       done: false,
+      data: {},
+      loading: false,
     };
   },
 
   methods: {
     finish() {
-      const address = this.address;
-      const city = this.city;
-      const name = this.name;
-      const state = this.state;
-
-      let images = this.files[0];
-      let certimage = this.certificateFile[0];
-      let menuimage = this.menuFile[0];
-      let idimage = this.idFile[0];
-
-      const type = this.type;
-      const phone = this.phone;
-
-      let vendorData = new FormData();
-      vendorData.append("address", address);
-      vendorData.append("city", city);
-      vendorData.append("name", name);
-      vendorData.append("state", state);
-      vendorData.append("images[]", images);
-      vendorData.append("images[]", certimage);
-      vendorData.append("images[]", idimage);
-      vendorData.append("images[]", menuimage);
-      vendorData.append("phone", phone);
-      vendorData.append("type", type);
+      this.loading = true;
       this.$api
-        .post("vendor/create", vendorData)
+        .post("register", this.data)
         .then((resp) => {
           this.$q.notify({
             message: resp.data.message,
@@ -319,10 +322,12 @@ export default {
             position: "top",
             timeout: 3000,
           });
+          this.loading = false;
           console.log(resp);
         })
         .catch(({ response }) => {
-          this.errors = response.data.errors;
+          this.loading = false;
+          this.errors = response.errors;
           setTimeout(() => {
             this.errors = [];
           }, 7000);
