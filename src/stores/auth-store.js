@@ -8,6 +8,7 @@ export const useAuthStore = defineStore("auth", {
     window_token: null,
     reg_step: 1,
     token: null,
+    userDetails:null,
   }),
   getters: {
     registrationForm: (state) => state.registration_form,
@@ -16,6 +17,12 @@ export const useAuthStore = defineStore("auth", {
     windowToken: (state) => state.window_token,
   },
   actions: {
+    setUserDetails(data) {
+      console.log(data,data.token)
+      this.userDetails= data
+      this.token= data.token
+    
+    },
     setRegStep(step) {
       this.reg_step = step;
     },

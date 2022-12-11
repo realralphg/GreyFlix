@@ -46,8 +46,16 @@ img {
 
 .my_container {
   margin: 0 auto;
-  width: 60%;
+  width: 70%;
   max-width: 1440px;
+}
+
+.kl .q-field__label {
+  color: #9b9696 !important;
+}
+
+.kl .q-field__prepend i {
+  color: #9b9696 !important;
 }
 
 .auth .q-stepper__dot {

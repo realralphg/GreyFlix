@@ -6,14 +6,20 @@
       container
       class="shadow-2 rounded-borders"
     >
-      <q-header elevated class="bg-cyan-8">
+      <q-header elevated class="bg-black">
         <q-toolbar>
           <q-toolbar-title>Header</q-toolbar-title>
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
         </q-toolbar>
       </q-header>
 
-      <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="400">
+      <q-drawer
+        v-model="drawer"
+        class="bg-secondary"
+        show-if-above
+        :width="200"
+        :breakpoint="400"
+      >
         <q-scroll-area>
           <q-list padding>
             <q-item clickable v-ripple>

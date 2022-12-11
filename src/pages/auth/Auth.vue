@@ -316,14 +316,18 @@ export default {
       this.$api
         .post("register", this.data)
         .then((resp) => {
+          console.log(resp);
+          this.$store.auth.setUserDetails(resp.data);
+          localStorage.setItem("token", resp.data.token);
           this.$q.notify({
-            message: resp.data.message,
+            message: "Successful",
             color: "green",
             position: "top",
             timeout: 3000,
           });
+          this.$router.replace({ name: "home" });
+          // this.$router.replace("/home");
           this.loading = false;
-          console.log(resp);
         })
         .catch(({ response }) => {
           this.loading = false;
