@@ -26,7 +26,7 @@
             bottom-slots
             name="password"
             v-model="data.password"
-            label="Create Password"
+            label=" Password"
             clearable
           >
             <template v-slot:append>
@@ -34,6 +34,10 @@
             </template>
           </q-input>
         </div>
+
+        <q-btn :loading="loading" type="submit" color="secondary">
+          Login
+        </q-btn>
       </form>
     </div>
   </div>
@@ -74,10 +78,10 @@ export default {
   },
 
   methods: {
-    finish() {
+    saveUser() {
       this.loading = true;
       this.$api
-        .post("register", this.data)
+        .post("login", this.data)
         .then((resp) => {
           console.log(resp);
           this.$store.auth.setUserDetails(resp.data);
@@ -113,12 +117,10 @@ p {
   margin-bottom: 0;
 }
 
-.continue_btn {
-  width: 100%;
-  background: #c1272d;
-  border-radius: 9.52192px;
-  padding: 1rem;
-  color: #fff;
+.auth {
+  background: #fff;
+  padding: 2rem;
+  margin-top: 3rem;
 }
 
 .or h3 {

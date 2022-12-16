@@ -1,101 +1,155 @@
 <template>
-  <div class="">
-    <q-layout
-      style="height: 100vh"
-      view="lHh Lpr lff"
-      container
-      class="shadow-2 rounded-borders"
+  <q-layout view="lHh Lpr lFf">
+    <q-header class="bg-black row items-center" elevated>
+      <q-btn
+        flat
+        dense
+        round
+        icon="menu"
+        aria-label="Menu"
+        class="text-white"
+        @click="drawer = !drawer"
+      />
+      <q-toolbar class="container justify-between">
+        <div class="logo">
+          <img src="/images/logo.png" alt="" />
+        </div>
+        <div class="nav__links">
+          <q-tabs indicator-color="accent" dense active-color="primary">
+            <q-route-tab label="Home" ripple no-caps to="/" exact />
+            <q-route-tab label="Movies" ripple no-caps to="/agrofoods" exact />
+
+            <q-route-tab
+              label="Animations"
+              ripple
+              no-caps
+              to="/agrofarms"
+              exact
+            />
+            <q-route-tab label="Shorts" ripple no-caps to="/agrotech" exact />
+            <q-route-tab label="Music" ripple no-caps to="/agrotech" exact />
+            <q-route-tab label="Arts" ripple no-caps to="/agrotech" exact />
+            <q-route-tab
+              label="VR Spaces"
+              ripple
+              no-caps
+              to="/agrotech"
+              exact
+            />
+            <q-route-tab
+              label="Join Community"
+              ripple
+              no-caps
+              to="/agrotech"
+              exact
+            />
+          </q-tabs>
+        </div>
+
+        <div class="right">
+          <q-btn
+            style="height: 40px; width: 40px"
+            dense
+            color="purple"
+            round
+            icon="email"
+            class="q-ml-md"
+          >
+            <q-badge color="red" floating>4</q-badge>
+          </q-btn>
+
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/img/avatar.png" />
+          </q-avatar>
+
+          <!-- <div class="connect">
+            <q-btn no-caps class="bg-red q-pa-sm text-white">
+              Connect Wallet <q-icon class="q-ml-sm" name="wallet" />
+            </q-btn>
+          </div> -->
+        </div>
+      </q-toolbar>
+    </q-header>
+
+    <q-drawer
+      v-model="drawer"
+      class="bg-secondary"
+      show-if-above
+      :width="250"
+      :breakpoint="400"
     >
-      <q-header elevated class="bg-black">
-        <q-toolbar>
-          <q-toolbar-title>Header</q-toolbar-title>
-          <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-        </q-toolbar>
-      </q-header>
+      <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px">
+        <q-list padding>
+          <q-item clickable v-ripple>
+            <q-item-section avatar>
+              <q-icon name="dashboard" />
+            </q-item-section>
+            <q-item-section class="text-white"> Dashboard </q-item-section>
+          </q-item>
+        </q-list>
+      </q-scroll-area>
 
-      <q-drawer
-        v-model="drawer"
-        class="bg-secondary"
-        show-if-above
-        :width="200"
-        :breakpoint="400"
+      <q-img
+        class="absolute-top"
+        src="https://cdn.quasar.dev/img/material.png"
+        style="height: 150px"
       >
-        <q-scroll-area>
-          <q-list padding>
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="inbox" />
-              </q-item-section>
+        <div class="absolute-bottom bg-transparent">
+          <q-avatar size="56px" class="q-mb-sm">
+            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+          </q-avatar>
+          <div class="text-weight-bold">Razvan Stoenescu</div>
+          <div>@rstoenescu</div>
+        </div>
+      </q-img>
+    </q-drawer>
 
-              <q-item-section> Inbox </q-item-section>
-            </q-item>
-
-            <q-item active clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="star" />
-              </q-item-section>
-
-              <q-item-section> Star </q-item-section>
-            </q-item>
-
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="send" />
-              </q-item-section>
-
-              <q-item-section> Send </q-item-section>
-            </q-item>
-
-            <q-item clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="drafts" />
-              </q-item-section>
-
-              <q-item-section> Drafts </q-item-section>
-            </q-item>
-          </q-list>
-        </q-scroll-area>
-
-        <q-img
-          class="absolute-top"
-          src="https://cdn.quasar.dev/img/material.png"
-          style="height: 150px"
-        >
-          <div class="absolute-bottom bg-transparent">
-            <q-avatar size="56px" class="q-mb-sm">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-            </q-avatar>
-            <div class="text-weight-bold">Razvan Stoenescu</div>
-            <div>@rstoenescu</div>
-          </div>
-        </q-img>
-      </q-drawer>
-
-      <q-page-container>
-        <!-- This is where pages get injected -->
-        <router-view />
-      </q-page-container>
-    </q-layout>
-  </div>
+    <q-page-container>
+      <router-view />
+    </q-page-container>
+  </q-layout>
 </template>
 
 <script>
-import { ref } from "vue";
+import { defineComponent, ref } from "vue";
 
-export default {
+export default defineComponent({
+  name: "MainLayout",
+
   setup() {
+    const leftDrawerOpen = ref(false);
+
     return {
+      leftDrawerOpen,
       drawer: ref(false),
+      toggleLeftDrawer() {
+        leftDrawerOpen.value = !leftDrawerOpen.value;
+      },
     };
   },
-};
+});
 </script>
-
 <style scoped>
-.dash {
+.nav__links ul,
+.right {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 80vh;
+  gap: 0.65rem;
+}
+.nav__links ul {
+  text-transform: capitalize;
+}
+
+.nav__toggler {
+  display: none;
+}
+
+.logo img {
+  width: 118px;
+}
+
+@media (max-width: 600px) {
+  .nav__toggler {
+    display: block;
+  }
 }
 </style>

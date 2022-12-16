@@ -1,63 +1,35 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-black" elevated>
+    <q-header class="bg-black row items-center" elevated>
+      <q-btn
+        flat
+        dense
+        round
+        icon="menu"
+        aria-label="Menu"
+        class="text-white nav__toggler"
+        @click="drawer = !drawer"
+      />
       <q-toolbar class="container justify-between">
         <div class="logo">
           <img src="/images/logo.png" alt="" />
         </div>
         <div class="nav__links">
           <q-tabs indicator-color="accent" dense active-color="primary">
-            <q-route-tab
-              style="width: 110px"
-              label="Home"
-              ripple
-              no-caps
-              to="/"
-              exact
-            />
-            <q-route-tab
-              style="width: 110px"
-              label="Movies"
-              ripple
-              no-caps
-              to="/agrofoods"
-              exact
-            />
+            <q-route-tab label="Home" ripple no-caps to="/" exact />
+            <q-route-tab label="Movies" ripple no-caps to="/agrofoods" exact />
 
             <q-route-tab
-              style="width: 110px"
               label="Animations"
               ripple
               no-caps
               to="/agrofarms"
               exact
             />
+            <q-route-tab label="Shorts" ripple no-caps to="/agrotech" exact />
+            <q-route-tab label="Music" ripple no-caps to="/agrotech" exact />
+            <q-route-tab label="Arts" ripple no-caps to="/agrotech" exact />
             <q-route-tab
-              style="width: 110px"
-              label="Shorts"
-              ripple
-              no-caps
-              to="/agrotech"
-              exact
-            />
-            <q-route-tab
-              style="width: 110px"
-              label="Music"
-              ripple
-              no-caps
-              to="/agrotech"
-              exact
-            />
-            <q-route-tab
-              style="width: 110px"
-              label="Arts"
-              ripple
-              no-caps
-              to="/agrotech"
-              exact
-            />
-            <q-route-tab
-              style="width: 110px"
               label="VR Spaces"
               ripple
               no-caps
@@ -65,7 +37,6 @@
               exact
             />
             <q-route-tab
-              style="width: 110px"
               label="Join Community"
               ripple
               no-caps
@@ -91,36 +62,47 @@
             <img src="https://cdn.quasar.dev/img/avatar.png" />
           </q-avatar>
 
-          <div class="connect">
+          <!-- <div class="connect">
             <q-btn no-caps class="bg-red q-pa-sm text-white">
               Connect Wallet <q-icon class="q-ml-sm" name="wallet" />
             </q-btn>
-          </div>
-
-          <q-btn
-            flat
-            dense
-            round
-            icon="menu"
-            aria-label="Menu"
-            class="nav__toggler"
-            @click="toggleLeftDrawer"
-          />
+          </div> -->
         </div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" bordered>
-      <q-list>
-        <q-item-label header> Essential Links </q-item-label>
+    <!-- <q-drawer
+      v-model="drawer"
+      class="bg-secondary"
+      show-if-above
+      :width="250"
+      :breakpoint="400"
+    >
+      <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px">
+        <q-list padding>
+          <q-item clickable v-ripple>
+            <q-item-section avatar>
+              <q-icon name="dashboard" />
+            </q-item-section>
+            <q-item-section class="text-white"> Dashboard </q-item-section>
+          </q-item>
+        </q-list>
+      </q-scroll-area>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
+      <q-img
+        class="absolute-top"
+        src="https://cdn.quasar.dev/img/material.png"
+        style="height: 150px"
+      >
+        <div class="absolute-bottom bg-transparent">
+          <q-avatar size="56px" class="q-mb-sm">
+            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+          </q-avatar>
+          <div class="text-weight-bold">Razvan Stoenescu</div>
+          <div>@rstoenescu</div>
+        </div>
+      </q-img>
+    </q-drawer> -->
 
     <q-page-container>
       <router-view />
@@ -130,66 +112,16 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import EssentialLink from "components/EssentialLink.vue";
-
-const linksList = [
-  {
-    title: "Docs",
-    caption: "quasar.dev",
-    icon: "school",
-    link: "https://quasar.dev",
-  },
-  {
-    title: "Github",
-    caption: "github.com/quasarframework",
-    icon: "code",
-    link: "https://github.com/quasarframework",
-  },
-  {
-    title: "Discord Chat Channel",
-    caption: "chat.quasar.dev",
-    icon: "chat",
-    link: "https://chat.quasar.dev",
-  },
-  {
-    title: "Forum",
-    caption: "forum.quasar.dev",
-    icon: "record_voice_over",
-    link: "https://forum.quasar.dev",
-  },
-  {
-    title: "Twitter",
-    caption: "@quasarframework",
-    icon: "rss_feed",
-    link: "https://twitter.quasar.dev",
-  },
-  {
-    title: "Facebook",
-    caption: "@QuasarFramework",
-    icon: "public",
-    link: "https://facebook.quasar.dev",
-  },
-  {
-    title: "Quasar Awesome",
-    caption: "Community Quasar projects",
-    icon: "favorite",
-    link: "https://awesome.quasar.dev",
-  },
-];
 
 export default defineComponent({
   name: "MainLayout",
-
-  components: {
-    EssentialLink,
-  },
 
   setup() {
     const leftDrawerOpen = ref(false);
 
     return {
-      essentialLinks: linksList,
       leftDrawerOpen,
+      drawer: ref(false),
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },

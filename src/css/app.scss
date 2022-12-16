@@ -44,6 +44,19 @@ img {
   max-width: 1440px;
 }
 
+.wrapper .q-field__native {
+  color: #fff;
+}
+
+.q-item__section--avatar {
+  min-width: none;
+}
+.table_page .q-table__card,
+.table_page .q-card,
+.table_page .q-tab-panels {
+  background: #3c3c3c !important;
+}
+
 .my_container {
   margin: 0 auto;
   width: 70%;
@@ -82,6 +95,10 @@ img {
 
 .auth .q-stepper__header--border {
   border-bottom: none;
+}
+
+.auth .q-field__native {
+  color: #fff;
 }
 .page {
   background: url("/images/bg.png") no-repeat center center/cover;
