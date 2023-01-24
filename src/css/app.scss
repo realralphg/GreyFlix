@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;1,700&display=swap");
 body {
   font-family: "Raleway", sans-serif;
-  background: url("/images/bg.png") no-repeat center center/cover;
+  background: url("/images/bg.png") black no-repeat center center/cover;
 }
 
 * {
@@ -44,9 +44,9 @@ img {
   max-width: 1440px;
 }
 
-.wrapper .q-field__native {
-  color: #fff;
-}
+// .wrapper .q-field__native {
+//   color: #fff;
+// }
 
 .q-item__section--avatar {
   min-width: none;
@@ -55,6 +55,11 @@ img {
 .table_page .q-card,
 .table_page .q-tab-panels {
   background: #3c3c3c !important;
+}
+
+.table_page td,
+.table_page th {
+  color: white;
 }
 
 .my_container {
@@ -97,9 +102,9 @@ img {
   border-bottom: none;
 }
 
-.auth .q-field__native {
-  color: #fff;
-}
+// .auth .q-field__native {
+//   color: #fff;
+// }
 .page {
   background: url("/images/bg.png") no-repeat center center/cover;
 }
@@ -164,6 +169,7 @@ a {
   border-radius: 20.0483px;
   padding: 0.55rem;
   text-transform: capitalize;
+  margin: 0.7rem;
 }
 .view::before {
   box-shadow: none;
@@ -188,8 +194,31 @@ a {
   width: 400px !important;
 }
 
+.auth .q-stepper--horizontal .q-stepper__step-inner {
+  padding: 0 24px;
+}
+
+@media (max-width: 1200px) {
+  .heading {
+    font-size: 90px;
+    line-height: 1.2;
+  }
+
+  .smaller__heading {
+    font-size: 43px;
+  }
+}
 @media (max-width: 800px) {
   .connect .q-chip {
     width: 300px !important;
+  }
+
+  .heading {
+    font-size: 70px;
+    line-height: 1.2;
+  }
+
+  .smaller__heading {
+    font-size: 33px;
   }
 }

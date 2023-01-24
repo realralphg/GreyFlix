@@ -16,18 +16,18 @@
         </div>
         <div class="nav__links">
           <q-tabs indicator-color="accent" dense active-color="primary">
-            <q-route-tab label="Home" ripple no-caps to="/" exact />
-            <q-route-tab label="Movies" ripple no-caps to="/agrofoods" exact />
+            <q-route-tab label="Home" ripple no-caps to="/home" exact />
+            <q-route-tab label="Music" ripple no-caps to="/" exact />
 
+            <q-route-tab label="Audio Stories" ripple no-caps to="/" exact />
             <q-route-tab
-              label="Animations"
+              label="Ticketing"
               ripple
               no-caps
               to="/agrofarms"
               exact
             />
-            <q-route-tab label="Shorts" ripple no-caps to="/agrotech" exact />
-            <q-route-tab label="Music" ripple no-caps to="/agrotech" exact />
+            <!-- <q-route-tab label="Music" ripple no-caps to="/agrotech" exact />
             <q-route-tab label="Arts" ripple no-caps to="/agrotech" exact />
             <q-route-tab
               label="VR Spaces"
@@ -42,7 +42,7 @@
               no-caps
               to="/agrotech"
               exact
-            />
+            /> -->
           </q-tabs>
         </div>
 

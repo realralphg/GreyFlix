@@ -1,7 +1,7 @@
 <template>
   <div class="style q-pa-md">
     <q-table
-      title="Categories"
+      title="Series"
       :rows="rows"
       :hide-header="mode === 'grid'"
       :columns="columns"
@@ -17,9 +17,9 @@
         <q-btn
           @click="createCategory"
           color="red"
-          label="Create Categories"
+          label="Create Series"
           padding="sm"
-          class="q-mr-xs"
+          class="q-ma-xs"
         />
 
         <q-input
@@ -62,16 +62,6 @@
             mode === "grid" ? "List" : "Grid"
           }}</q-tooltip>
         </q-btn>
-
-        <q-btn
-          color="primary"
-          icon-right="archive"
-          label="Export to csv"
-          no-caps
-          padding="xs"
-          v-if="rows.length"
-          @click="exportTable"
-        />
       </template>
 
       <template v-slot:body-cell-image_url="props">
@@ -91,12 +81,12 @@
               size="sm"
               icon="delete"
               :loading="loaders.deleteBtn[props.value]"
-              @click="deletecategories(props.value)"
+              @click="deleteSeries(props.value)"
             >
               <q-tooltip>Delete {{ props.row.name }}</q-tooltip>
             </q-btn>
 
-            <!-- {{ CategoriesNumber }} -->
+            <!-- {{ SeriesNumber }} -->
 
             <q-btn
               round
@@ -107,7 +97,7 @@
               class="q-ml-sm"
               icon="edit"
               :loading="loaders.save[props.value]"
-              @click="editcategories(props.row)"
+              @click="editSeries(props.row)"
             >
               <q-tooltip>Edit {{ props.row.name }}</q-tooltip>
             </q-btn>
@@ -133,11 +123,11 @@
       </template>
     </q-table>
   </div>
-  <q-dialog v-model="create_Page">
+  <q-dialog v-model="create_title">
     <q-card style="width: 800px; max-width: 85vw">
       <q-card-section>
         <div class="text-h6">
-          Create Category
+          Create Series
           <q-btn
             round
             flat
@@ -152,7 +142,7 @@
       <q-separator inset></q-separator>
       <q-card-section class="q-pt-none">
         <q-form
-          @submit.prevent="createPage"
+          @submit.prevent="createtitle"
           class="q-gutter-md"
           ref="fruitbayForm"
         >
@@ -164,65 +154,64 @@
                 dense
                 color="teal"
                 outlined
-                name="file"
+                name="image"
                 accept=".jpg,.png,.svg,.jpeg"
                 v-model="image"
                 label="Image"
-                @update:model-value="setFile"
               >
               </q-file>
+            </div>
+            <div class="col">
+              <q-item-label class="q-pb-xs">Category</q-item-label>
+              <select name="" v-model="category" id="">
+                <option
+                  v-for="category in categories"
+                  :key="category.id"
+                  :value="category.id"
+                >
+                  {{ category.title }}
+                </option>
+              </select>
             </div>
           </div>
 
           <div class="row q-gutter-sm">
             <div class="col">
-              <q-item-label class="q-pb-xs">Page</q-item-label>
-              <q-input dense outlined name="page" v-model="page" label="Page" />
-              <div class="error" v-if="errors.page">{{ errors.page[0] }}</div>
-            </div>
-            <div class="col">
-              <q-item-label class="q-pb-xs">Chapter Id</q-item-label>
+              <q-item-label class="q-pb-xs">Title</q-item-label>
               <q-input
                 dense
                 outlined
-                name="chapter_id"
-                type="text"
-                v-model="chapter_id"
-                label="Chapter Id"
+                name="title"
+                v-model="title"
+                label="Title"
               />
-              <div class="error" v-if="errors.chapter_id">
-                {{ errors.chapter_id[0] }}
+              <div class="error" v-if="errors.title">{{ errors.title[0] }}</div>
+            </div>
+            <div class="col">
+              <q-item-label class="q-pb-xs">Type</q-item-label>
+              <select name="" v-model="type" id="">
+                <option value="movie">Movie</option>
+                <option value="story">Story</option>
+              </select>
+              <div class="error" v-if="errors.type">
+                {{ errors.type[0] }}
               </div>
             </div>
           </div>
+
           <div class="row q-gutter-sm">
             <div class="col">
-              <q-item-label class="q-pb-xs">Content id</q-item-label>
-              <q-input
-                dense
-                outlined
-                name="content_id"
-                v-model="content_id"
-                label="Content id"
-              />
-              <div class="error" v-if="errors.content_id">
-                {{ errors.content_id[0] }}
-              </div>
-            </div>
-          </div>
-          <div class="row q-gutter-sm">
-            <div class="col">
-              <q-item-label class="q-pb-xs">Meta</q-item-label>
+              <q-item-label class="q-pb-xs">Description</q-item-label>
               <q-input
                 dense
                 outlined
                 type="textarea"
-                name="meta"
-                v-model="meta"
-                label="Meta"
+                name="description"
+                v-model="description"
+                label="description"
               />
-              <div class="error" v-if="errors.meta">
-                {{ errors.meta[0] }}
+              <div class="error" v-if="errors.description">
+                {{ errors.description[0] }}
               </div>
             </div>
           </div>
@@ -233,7 +222,7 @@
               label="Save"
               type="submit"
               color="primary"
-              @click="createPage"
+              @click="createtitle"
               v-close-popup="false"
               :loading="loading"
             />
@@ -265,11 +254,11 @@ const columns = [
     sortable: true,
   },
   {
-    name: "page",
+    name: "title",
     required: true,
-    label: "Page",
+    label: "title",
     align: "left",
-    field: "page",
+    field: "title",
     sortable: true,
   },
   {
@@ -282,12 +271,12 @@ const columns = [
   },
 
   {
-    name: "meta",
+    name: "description",
     required: true,
-    label: "Meta",
+    label: "description",
     align: "left",
-    field: "meta",
-    // field: (row) => row.meta.substr(0, 50),
+    field: "description",
+    // field: (row) => row.description.substr(0, 50),
     sortable: true,
   },
 
@@ -310,27 +299,27 @@ function wrapCsvValue(val, formatFn) {
 export default {
   setup() {
     useMeta({
-      title: "Create Categories",
+      title: "Create Series",
     });
   },
   data() {
     return {
       columns,
+      priority: 1,
       selected: [],
       category: null,
-      categories: [],
+      Series: [],
       rows: [],
       errors: [],
-      fruitbay: {},
       image: null,
-      page: "",
-      pageid: "",
-      chapter_id: "",
-      content_id: "",
+      title: "",
+      categories: [],
       files: null,
       editstate: false,
       createstate: null,
-      meta: "",
+      description: "",
+      type: "",
+      seriesid: "",
       filter: "",
       curl: "",
       separator: "",
@@ -339,7 +328,7 @@ export default {
       new_fruitbay: false,
       loading: false,
       editLoad: false,
-      create_Page: false,
+      create_title: false,
       loaders: {
         delete: false,
         category: false,
@@ -349,23 +338,19 @@ export default {
     };
   },
 
-  computed: {
-    CategoriesNumber() {
-      return Math.ceil(this.rows.length / this.pagination.rowsPerPage);
-    },
-  },
-
   mounted() {
     this.onRequest({
       pagination: this.pagination,
       filter: undefined,
     });
+
+    this.getCategories();
   },
 
   methods: {
     onRequest(props) {
       this.loading = true;
-      const url = `admin/contents/65/chapters/22/Categories?limit=${100}`;
+      const url = `admin/series`;
       this.curl = url;
       this.$api
         .get(url)
@@ -380,43 +365,51 @@ export default {
           this.rows = [];
         });
     },
+    getCategories() {
+      this.$api
+        .get(`/admin/categories`)
+        .then((response) => {
+          this.categories = response.data.data;
+          console.log(response);
+        })
+        .catch(({ response }) => {
+          console.log(response);
+        });
+    },
 
     createCategory() {
       this.editstate = false;
-      this.create_Page = true;
-      this.page = "";
+      this.create_title = true;
+      this.title = "";
       this.chapter_id = "";
       this.content_id = "";
       this.image = "";
-      this.meta = "";
+      this.description = "";
     },
-    createPage(e) {
+    createtitle(e) {
       e.preventDefault();
 
-      let page = this.page;
-      let chapter_id = this.chapter_id;
-      let content_id = this.content_id;
-      let meta = this.meta;
-      let file = this.image;
+      let title = this.title;
+      let priority = this.priority;
+      let type = this.type;
+      let description = this.description;
+      let image = this.image;
 
       const formData = new FormData();
-      formData.append("page", page);
-      formData.append("chapter_id", chapter_id);
-      formData.append("content_id", content_id);
-      formData.append("meta", meta);
-      formData.append("file", file);
+      formData.append("title", title);
+      formData.append("priority", priority);
+      formData.append("type", type);
+      formData.append("description", description);
+      formData.append("image", image);
       this.loading = true;
       this.$api
-        .post(
-          `admin/contents/${content_id}/chapters/${chapter_id}/Categories`,
-          formData
-        )
+        .post(`admin/series`, formData)
         .then(({ data }) => {
           console.log("added", data);
-          this.refreshPage();
+          this.refreshtitle();
           this.loading = true;
 
-          this.create_Page = false;
+          this.create_title = false;
           this.image = null;
           this.errors = [];
           this.$q.notify({
@@ -426,11 +419,7 @@ export default {
           });
         })
         .catch((e) => {
-          let error = this.$plugins.reader.error(e);
-          this.errors = error.errors || {};
           this.loading = false;
-
-          this.$helper.notify(error.message || error, error.status || "error");
           this.$q.notify({
             message: "Error",
             color: "red",
@@ -438,48 +427,43 @@ export default {
           });
         });
     },
-    editcategories(manga) {
+    editSeries(series) {
       this.editstate = true;
-      this.create_Page = true;
-      console.log(manga);
-      this.meta = manga.meta;
-      this.chapter_id = manga.chapter_id;
-      this.content_id = manga.chapter.content_id;
-      this.page = manga.page;
-      let pageid = manga.id;
-      this.pageid = pageid;
+      this.create_title = true;
+      console.log(series);
+      this.title = series.title;
+      this.description = series.description;
+      this.priority = series.priority;
+      this.type = series.type;
+      this.image = series.image;
+      let seriesid = series.id;
+      this.seriesid = seriesid;
     },
 
     editedFunction(e) {
       e.preventDefault();
-      let pageid = this.pageid;
-      let page = this.page;
-      let chapter_id = this.chapter_id;
-      let content_id = this.content_id;
-      let meta = this.meta;
-      let file = this.image;
-
-      console.log(this.chapter_id, this.content_id, this.pageid);
+      let seriesid = this.seriesid;
+      let title = this.title;
+      let priority = this.priority;
+      let type = this.type;
+      let description = this.description;
+      let image = this.image;
 
       const formData = new FormData();
-      formData.append("page", page);
-      formData.append("chapter_id", chapter_id);
-      formData.append("content_id", content_id);
-      formData.append("meta", meta);
+      formData.append("title", title);
+      formData.append("priority", priority);
+      formData.append("type", type);
+      formData.append("description", description);
       formData.append("_method", "PUT");
-
-      formData.append("file", file);
+      formData.append("image", image);
       this.editLoad = true;
       this.$api
-        .post(
-          `admin/contents/${content_id}/chapters/${chapter_id}/Categories/${pageid}`,
-          formData
-        )
+        .post(`admin/series/${seriesid}`, formData)
         .then(({ data }) => {
           console.log("edited", data);
-          this.refreshPage();
+          this.refreshtitle();
           this.editLoad = false;
-          this.create_Page = false;
+          this.create_title = false;
           this.image = null;
           this.errors = [];
         })
@@ -491,7 +475,7 @@ export default {
           this.$helper.notify(error.message || error, error.status || "error");
         });
     },
-    deletecategories(id) {
+    deleteSeries(id) {
       console.log(id);
       const ids =
         (id && typeof id === "string") || typeof id === "number"
@@ -499,8 +483,8 @@ export default {
           : this.selected.map((e) => e.id);
       this.$helper
         .notify(
-          "Are you sure you want to delete this fruitbay(s)? This action may be irreversible!",
-          "error",
+          "Are you sure you want to delete ? ",
+          "delete",
           true,
           "Yes, Delete!"
         )
@@ -508,13 +492,13 @@ export default {
           if (id) this.loaders.deleteBtn[id] = true;
           this.loaders.delete = true;
           this.$api
-            .delete(`admin/contents/65/chapters/22/Categories/${id}`)
+            .delete(`admin/contents/65/chapters/22/Series/${id}`)
             .then((response) => {
               this.loaders.delete = false;
               if (id) this.loaders.deleteBtn[id] = false;
 
               this.selected = [];
-              this.refreshPage();
+              this.refreshtitle();
             })
             .catch((response) => {
               console.log(response);
@@ -532,14 +516,14 @@ export default {
 
       console.log(ids);
       this.$api
-        .delete("admin/contents/1/chapters/1/Categories", {
+        .delete("admin/contents/1/chapters/1/Series", {
           params: { items: ids },
         })
         .then((response) => {
           this.loaders.delete = false;
           if (id) this.loaders.deleteBtn[id] = false;
           this.selected = [];
-          this.refreshPage();
+          this.refreshtitle();
         })
         .catch((response) => {
           console.log(response);
@@ -548,7 +532,7 @@ export default {
         });
     },
 
-    refreshPage() {
+    refreshtitle() {
       if (this.curl !== "") {
         this.loading = true;
         this.$api
@@ -600,5 +584,11 @@ export default {
 <style scoped>
 .error {
   color: red;
+}
+
+select {
+  border: 1px solid #aaa9a9;
+  width: 100%;
+  padding: 0.6rem 0.5rem;
 }
 </style>

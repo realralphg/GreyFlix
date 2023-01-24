@@ -4,20 +4,29 @@
       {{ name }}
     </div>
     <div class="row-posts">
-      <img
-        v-for="movie in movies"
-        :key="movie.id"
+      <div
+        v-for="audio in audios"
+        :key="audio.id"
         :class="largeRow ? 'large-poster' : 'row-poster'"
-        :src="`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`"
-        alt=""
-      />
+      >
+        <router-link
+          :to="{
+            name: 'audio.content',
+            params: { contentid: audio.id, slug: audio.slug },
+          }"
+        >
+          <img src="/images/recent/2.jpg" alt="" />
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+// :src="audio.cover_url ? audio.cover_url : '/images/recent/2.jpg'"
+
 export default {
-  props: ["movies", "largeRow", "name"],
+  props: ["audios", "largeRow", "name"],
 };
 </script>
 

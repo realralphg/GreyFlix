@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper vendor_onboard container">
-    <div class="my_container auth q-pt-xl">
+  <!-- <div class="wrapper vendor_onboard container">
+    <div class="my_container auth">
       <q-stepper
         v-model="step"
         ref="stepper"
@@ -11,7 +11,7 @@
         header-nav
       >
         <q-step :name="1" title="Step 1" icon="settings" :done="step > 1">
-          <div class="right q-mt-xl">
+          <div class="right q-mt-md">
             <div class="bio">
               <div class="text-h6 q-mb-lg text-center text-weight-bold">
                 Create Your Account
@@ -134,14 +134,14 @@
                 </p>
               </div>
 
-              <div class="or text-center q-mt-xl">
+              <div class="or text-center q-mt-md">
                 <h3>Or</h3>
 
-                <div class="q-mt-xl">
+                <div class="q-mt-md">
                   <h4>Sign Up using</h4>
 
                   <div
-                    class="row text-center justify-center q-mt-xl items-center"
+                    class="row text-center justify-center q-mt-md items-center"
                   >
                     <i style="font-size: 2.4rem" class="ri-google-fill"></i>
                     <i style="font-size: 2.4rem" class="ri-apple-fill"></i>
@@ -247,7 +247,7 @@
               <img src="/images/wallets/2.png" alt="" /> Coinbase
             </q-chip>
           </div>
-          <div class="q-mt-xl" v-if="done">
+          <div class="q-mt-md" v-if="done">
             <div class="done text-center text-weight-bold">
               Your Account have been created successfully
             </div>
@@ -273,6 +273,184 @@
         </template>
       </q-stepper>
     </div>
+  </div> -->
+  <div class="wrapper vendor_onboard container">
+    <div class="my_container auth">
+      <div class="right q-mt-md">
+        <div class="bio">
+          <div class="text-h6 q-mb-lg text-center text-weight-bold">
+            Create Your Account
+          </div>
+
+          <div class="hold">
+            <div class="inputs">
+              <div class="holdd">
+                <form
+                  enctype="multipart/form-data"
+                  id="form"
+                  @submit.prevent="saveUser"
+                >
+                  <div class="input-wrap">
+                    <q-input
+                      color="orange"
+                      standout
+                      ref="nameRef"
+                      :rules="nameRules"
+                      outlined
+                      bottom-slots
+                      v-model="data.firstname"
+                      label="First Name"
+                      clearable
+                      name="firstname"
+                    >
+                      <template v-slot:append>
+                        <i class="ri-folder-user-line"></i>
+                      </template>
+                    </q-input>
+
+                    <div class="error" v-if="errors['data.dob']">
+                      {{ errors["data.dob"][1] }}
+                    </div>
+                  </div>
+                  <div class="input-wrap">
+                    <q-input
+                      color="orange"
+                      standout
+                      outlined
+                      bottom-slots
+                      ref="nameRef"
+                      v-model="data.lastname"
+                      :rules="nameRules"
+                      label="Last Name"
+                      clearable
+                      name="lastname"
+                    >
+                      <template v-slot:append>
+                        <i class="ri-folder-user-line"></i>
+                      </template>
+                    </q-input>
+
+                    <div class="error" v-if="errors['data.dob']">
+                      {{ errors["data.dob"][1] }}
+                    </div>
+                  </div>
+
+                  <div class="input-wrap">
+                    <q-input
+                      color="orange"
+                      standout
+                      outlined
+                      bottom-slots
+                      name="phone"
+                      ref="nameRef"
+                      v-model="data.phone"
+                      :rules="nameRules"
+                      label="Phone"
+                      clearable
+                    >
+                      <template v-slot:append>
+                        <i class="ri-folder-user-line"></i>
+                      </template>
+                    </q-input>
+                    <div class="error" v-if="errors['data.dob']">
+                      {{ errors["data.dob"][1] }}
+                    </div>
+                  </div>
+                  <div class="input-wrap">
+                    <q-input
+                      color="orange"
+                      standout
+                      outlined
+                      ref="emailRef"
+                      bottom-slots
+                      v-model="data.email"
+                      :rules="nameRules"
+                      label="Email"
+                      name="email"
+                      clearable
+                    >
+                      <template v-slot:append>
+                        <i class="ri-mail-line"></i>
+                      </template>
+                    </q-input>
+                    <div class="error" v-if="errors['data.dob']">
+                      {{ errors["data.dob"][1] }}
+                    </div>
+                  </div>
+                  <div class="input-wrap">
+                    <q-input
+                      color="orange"
+                      standout
+                      outlined
+                      bottom-slots
+                      name="password"
+                      v-model="data.password"
+                      :rules="nameRules"
+                      label="Create Password"
+                      clearable
+                    >
+                      <template v-slot:append>
+                        <i class="ri-lock-password-line"></i>
+                      </template>
+                    </q-input>
+                    <div class="error" v-if="errors['data.dob']">
+                      {{ errors["data.dob"][1] }}
+                    </div>
+                  </div>
+                  <div class="input-wrap">
+                    <q-input
+                      color="orange"
+                      standout
+                      outlined
+                      bottom-slots
+                      name="password_confirmation"
+                      v-model="data.password_confirmation"
+                      :rules="nameRules"
+                      label=" Password Confirmation"
+                      clearable
+                    >
+                      <template v-slot:append>
+                        <i class="ri-lock-password-line"></i>
+                      </template>
+                    </q-input>
+                    <div class="error" v-if="errors['data.dob']">
+                      {{ errors["data.dob"][1] }}
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="row items-center">
+            <q-checkbox color="red" v-model="valCheck" />
+            <p>
+              I have read and agreed to
+              <q-btn class="terms">Terms and Conditions</q-btn>.
+            </p>
+          </div>
+
+          <div class="or text-center q-mt-md">
+            <h3>Or</h3>
+
+            <div class="q-mt-md">
+              <h4>Sign Up using</h4>
+
+              <div class="row text-center justify-center q-mt-md items-center">
+                <i style="font-size: 2.4rem" class="ri-google-fill"></i>
+                <i style="font-size: 2.4rem" class="ri-apple-fill"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <q-btn
+        @click="finish"
+        class="continue_btn"
+        :loading="loading"
+        :label="step === 3 ? 'Register' : 'Next'"
+      />
+    </div>
   </div>
 </template>
 
@@ -289,10 +467,15 @@ export default {
       VRspaces: false,
       tour: false,
     });
+    const nameRef = ref(null);
+    const emailRef = ref(null);
     return {
       step: ref(1),
+      nameRef,
+      emailRef,
       valCheck: ref(true),
       text: "",
+      nameRules: [(val) => (val && val.length > 0) || "Please type something"],
       interests,
       selection: computed(() => {
         return Object.keys(interests)
@@ -312,31 +495,41 @@ export default {
 
   methods: {
     finish() {
-      this.loading = true;
-      this.$api
-        .post("register", this.data)
-        .then((resp) => {
-          console.log(resp);
-          this.$store.auth.setUserDetails(resp.data);
-          localStorage.setItem("token", resp.data.token);
-          this.$q.notify({
-            message: "Successful",
-            color: "green",
-            position: "top",
-            timeout: 3000,
-          });
-          this.$router.replace({ name: "home" });
-          // this.$router.replace("/home");
-          this.loading = false;
-        })
-        .catch(({ response }) => {
-          this.loading = false;
-          this.errors = response.errors;
-          setTimeout(() => {
-            this.errors = [];
-          }, 7000);
-          console.log(response);
+      console.log(this.nameRef);
+      this.nameRef.value.validate();
+      this.emailRef.value.validate();
+      if (this.nameRef.value.hasError || this.emailRef.value.hasError) {
+      } else if (this.valCheck === false) {
+        this.$q.notify({
+          color: "negative",
+          message: "You need to accept the license and terms first",
         });
+      } else {
+        this.loading = true;
+        this.$api
+          .post("register", this.data)
+          .then((resp) => {
+            console.log(resp);
+            this.$store.auth.setUserDetails(resp.data);
+            localStorage.setItem("token", resp.data.token);
+            this.$q.notify({
+              message: "Successful",
+              color: "green",
+              position: "top",
+              timeout: 3000,
+            });
+            this.$router.replace({ name: "home" });
+            this.loading = false;
+          })
+          .catch(({ response }) => {
+            this.loading = false;
+            this.errors = response.errors;
+            setTimeout(() => {
+              this.errors = [];
+            }, 7000);
+            console.log(response);
+          });
+      }
     },
   },
 };
@@ -345,6 +538,7 @@ export default {
 <style scoped>
 .wrapper {
   overflow: hidden;
+  padding: 3rem 0;
 }
 p {
   margin-bottom: 0;
@@ -356,6 +550,15 @@ p {
   border-radius: 9.52192px;
   padding: 1rem;
   color: #fff;
+}
+
+.auth {
+  background: #fff;
+  padding: 2rem;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 20%), 0 2px 2px rgb(0 0 0 / 14%),
+    0 3px 1px -2px rgb(0 0 0 / 12%);
+  border-radius: 4px;
+  background: #fff;
 }
 
 .or h3 {
@@ -405,5 +608,9 @@ p {
 .connect img {
   width: 40px;
   margin-right: 1rem;
+}
+
+.input-wrap {
+  margin: 1rem 0;
 }
 </style>

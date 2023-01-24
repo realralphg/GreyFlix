@@ -10,7 +10,7 @@
               outlined
               class="bg-black"
               name="info"
-              v-model="info"
+              v-model="data.info"
               label="Info"
             />
             <div class="error" v-if="errors.info">
@@ -23,7 +23,7 @@
               class="bg-black"
               outlined
               name="title"
-              v-model="title"
+              v-model="data.title"
               label="Title"
             />
             <div class="error" v-if="errors.title">
@@ -39,7 +39,7 @@
             class="bg-black"
             outlined
             name="status"
-            v-model="status"
+            v-model="data.status"
             label="Status"
           />
           <div class="error" v-if="errors.status">
@@ -53,7 +53,7 @@
             name="cover"
             filled
             class="bg-black"
-            v-model="cover"
+            v-model="data.cover"
             label="Cover File"
           >
           </q-file>
@@ -63,14 +63,19 @@
         </div>
 
         <div class="hold">
-          <q-input
+          <!-- <q-input
             outlined
             type="number"
             name="series_id"
             class="bg-black"
             v-model="series_id"
             label="Series ID"
-          />
+          /> -->
+          <select name="" v-model="data.series_id" id="">
+            <option v-for="serie in series" :key="serie.id" :value="serie.id">
+              {{ serie.title }}
+            </option>
+          </select>
           <div class="error" v-if="errors.series_id">
             {{ errors.series_id[0] }}
           </div>
@@ -82,7 +87,7 @@
           outlined
           class="bg-black"
           name="meta"
-          v-model="meta"
+          v-model="data.meta"
           label="Meta"
         />
         <div class="error" v-if="errors.meta">
@@ -95,7 +100,7 @@
           name="File"
           filled
           class="bg-black"
-          v-model="model"
+          v-model="data.model"
           label="Audio File"
         >
           <template v-slot:prepend>
@@ -124,37 +129,50 @@ import { ref } from "vue";
 export default {
   data() {
     return {
-      model: ref(null),
       errors: [],
-      status: "",
+      series: [],
+      data: {
+        cover: ref(null),
+        model: ref(null),
+      },
       loading: false,
-      cover: ref(null),
-      series_id: "",
-      title: "",
-      meta: "",
-      info: "",
     };
   },
 
+  mounted() {
+    this.getSeries();
+  },
+
   methods: {
+    getSeries() {
+      this.$api
+        .get(`/admin/series`)
+        .then((response) => {
+          this.series = response.data.data;
+          //   console.log(response);
+        })
+        .catch(({ response }) => {
+          console.log(response);
+        });
+    },
     createAudioStory() {
       const formData = new FormData();
-      formData.append("file", this.model);
-      formData.append("info", this.info);
-      formData.append("cover", this.cover);
-      formData.append("meta", this.meta);
-      formData.append("status", this.status);
-      formData.append("title", this.title);
-      formData.append("series_id", this.series_id);
+      formData.append("file", this.data.model);
+      formData.append("info", this.data.info);
+      formData.append("cover", this.data.cover);
+      formData.append("meta", this.data.meta);
+      formData.append("status", this.data.status);
+      formData.append("title", this.data.title);
+      formData.append("series_id", this.data.series_id);
       this.loading = true;
       this.$api
         .post("/admin/audio/stories", formData)
         .then((resp) => {
           this.loading = false;
-          console.log(resp);
+          //   console.log(resp);
           // console.log(JSON.parse(resp));
           this.$q.notify({
-            message: "Student upload Successful",
+            message: "Upload Successful",
             color: "green",
             position: "top",
           });
@@ -199,6 +217,18 @@ export default {
   background: rgba(0, 0, 0, 0.2);
   border-radius: 4px 4px 0 0;
   width: 100%;
+}
+
+select {
+  width: 100%;
+  padding: 0 0.5rem;
+  min-height: 55px;
+  background: #000;
+  color: #fff;
+}
+
+select:focus {
+  outline: none;
 }
 
 .kl .q-field {

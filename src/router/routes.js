@@ -6,6 +6,7 @@ const routes = [
     children: [
       { path: '/home', component: () => import('pages/IndexPage.vue'),name:'home' },
       { path: '/MusicStories', component: () => import('pages/MusicStories.vue'),name:'MusicStories' },
+      { path: '/audio', component: () => import('pages/AudioDetail.vue'),name:'audio.content' },
       // { path: '/dashboard', component: () => import('pages/Dashboard/Dashboard.vue') },
     ]
   },
@@ -21,7 +22,7 @@ const routes = [
     component: () => import('layouts/landingpage.vue'),
     children: [
       { path: '/landingPage', component: () => import('pages/LandingPage.vue'), name:'landingPage' },
-      { path: '/auth', component: () => import('pages/auth/Auth.vue'), name:'auth' },
+      { path: '/register', component: () => import('pages/auth/Auth.vue'), name:'register' },
       { path: '/login', component: () => import('pages/auth/Login.vue'), name:'login' },
     ]
   },

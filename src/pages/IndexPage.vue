@@ -1,7 +1,7 @@
 <template>
   <q-page class="page">
     <Hero />
-    <Watch :movies="movies" :largeRow="largeRow" name="Watch Movies" />
+    <Watch :audios="audios" :largeRow="largeRow" name="Audio Stories" />
     <Music :musics="musicData" />
     <Animations
       :movies="animations"
@@ -42,6 +42,7 @@ export default defineComponent({
       movies: [],
       trendingMovies: [],
       largeRow: true,
+      audios: [],
       musicData: [
         {
           id: 1,
@@ -224,26 +225,16 @@ export default defineComponent({
   },
 
   created() {
-    this.getTopMovies();
-    this.getTrendingMovies();
+    this.getmusicstories();
   },
   methods: {
-    getTopMovies() {
-      const API_KEY = "8897d6373a8d096f760008eabb6376ef";
-
-      axios.get(`/movie/top_rated?api_key=${API_KEY}`).then((resp) => {
-        console.log(resp.data.results);
-        this.movies = resp.data.results;
-      });
-    },
-    getTrendingMovies() {
-      const API_KEY = "8897d6373a8d096f760008eabb6376ef";
-
-      axios.post(`vendor/create`).then((resp) => {
-        console.log(resp.data.results);
-        this.trendingMovies = resp.data.results;
+    getmusicstories() {
+      this.$api.get(`/audio/stories`).then((resp) => {
+        console.log(resp);
+        this.audios = resp.data.data;
       });
     },
   },
 });
 </script>
+<style scoped></style>

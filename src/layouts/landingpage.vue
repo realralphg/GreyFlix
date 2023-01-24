@@ -8,7 +8,21 @@
 
         <div class="right">
           <div class="connect">
-            <q-btn no-caps class="sign q-pa-sm text-white"> Sign in </q-btn>
+            <q-btn
+              :to="
+                $router.currentRoute.value.path === '/login'
+                  ? '/register'
+                  : '/login'
+              "
+              no-caps
+              class="sign q-pa-sm text-white"
+            >
+              {{
+                $router.currentRoute.value.path === "/login"
+                  ? "Sign Up"
+                  : "Login"
+              }}
+            </q-btn>
           </div>
 
           <q-btn

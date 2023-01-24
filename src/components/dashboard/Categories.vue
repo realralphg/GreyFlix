@@ -19,7 +19,7 @@
           color="red"
           label="Create Categories"
           padding="sm"
-          class="q-mr-xs"
+          class="q-ma-xs"
         />
 
         <q-input
@@ -62,16 +62,6 @@
             mode === "grid" ? "List" : "Grid"
           }}</q-tooltip>
         </q-btn>
-
-        <q-btn
-          color="primary"
-          icon-right="archive"
-          label="Export to csv"
-          no-caps
-          padding="xs"
-          v-if="rows.length"
-          @click="exportTable"
-        />
       </template>
 
       <template v-slot:body-cell-image_url="props">
@@ -187,7 +177,7 @@
             </div>
             <div class="col">
               <q-item-label class="q-pb-xs">Type</q-item-label>
-              <!-- <select name="" v-model="type" id="">
+              <select name="" v-model="type" id="">
                 <option value="movie">Movie</option>
                 <option value="animation">Animation</option>
                 <option value="nft">NFT</option>
@@ -196,7 +186,7 @@
               </select>
               <div class="error" v-if="errors.type">
                 {{ errors.type[0] }}
-              </div> -->
+              </div>
             </div>
           </div>
 
@@ -244,7 +234,7 @@
 </template>
 
 <script>
-import { exportFile, usedescription } from "quasar";
+import { exportFile, useMeta } from "quasar";
 const columns = [
   {
     name: "id",
@@ -299,7 +289,7 @@ function wrapCsvValue(val, formatFn) {
 }
 export default {
   setup() {
-    usedescription({
+    useMeta({
       title: "Create Categories",
     });
   },
@@ -327,8 +317,7 @@ export default {
       curl: "",
       separator: "",
       mode: "list",
-      role: "fruitbay",
-      new_fruitbay: false,
+      categoryid: "",
       loading: false,
       editLoad: false,
       create_title: false,
@@ -357,7 +346,7 @@ export default {
   methods: {
     onRequest(props) {
       this.loading = true;
-      const url = `admin/contents/65/chapters/22/Categories?limit=${100}`;
+      const url = `admin/categories`;
       this.curl = url;
       this.$api
         .get(url)
@@ -386,23 +375,20 @@ export default {
       e.preventDefault();
 
       let title = this.title;
-      let chapter_id = this.chapter_id;
-      let content_id = this.content_id;
+      let priority = this.priority;
+      let type = this.type;
       let description = this.description;
-      let file = this.image;
+      let image = this.image;
 
       const formData = new FormData();
       formData.append("title", title);
-      formData.append("chapter_id", chapter_id);
-      formData.append("content_id", content_id);
+      formData.append("priority", priority);
+      formData.append("type", type);
       formData.append("description", description);
-      formData.append("file", file);
+      formData.append("image", image);
       this.loading = true;
       this.$api
-        .post(
-          `admin/contents/${content_id}/chapters/${chapter_id}/Categories`,
-          formData
-        )
+        .post(`admin/categories`, formData)
         .then(({ data }) => {
           console.log("added", data);
           this.refreshtitle();
@@ -418,11 +404,11 @@ export default {
           });
         })
         .catch((e) => {
-          let error = this.$plugins.reader.error(e);
-          this.errors = error.errors || {};
+          //   let error = this.$plugins.reader.error(e);
+          //   this.errors = error.errors || {};
           this.loading = false;
 
-          this.$helper.notify(error.message || error, error.status || "error");
+          //   this.$helper.notify(error.message || error, error.status || "error");
           this.$q.notify({
             message: "Error",
             color: "red",
@@ -430,43 +416,37 @@ export default {
           });
         });
     },
-    editcategories(manga) {
+    editcategories(category) {
       this.editstate = true;
       this.create_title = true;
-      console.log(manga);
-      this.description = manga.description;
-      this.chapter_id = manga.chapter_id;
-      this.content_id = manga.chapter.content_id;
-      this.title = manga.title;
-      let titleid = manga.id;
-      this.titleid = titleid;
+      console.log(category);
+      this.description = category.description;
+      this.priority = category.priority;
+      this.type = category.type;
+      this.title = category.title;
+      this.image = category.image;
+      let categoryid = category.id;
+      this.categoryid = categoryid;
     },
 
     editedFunction(e) {
       e.preventDefault();
-      let titleid = this.titleid;
+      let categoryid = this.categoryid;
       let title = this.title;
-      let chapter_id = this.chapter_id;
-      let content_id = this.content_id;
+      let type = this.type;
+      let priority = this.priority;
       let description = this.description;
-      let file = this.image;
-
-      console.log(this.chapter_id, this.content_id, this.titleid);
-
+      let image = this.image;
       const formData = new FormData();
       formData.append("title", title);
-      formData.append("chapter_id", chapter_id);
-      formData.append("content_id", content_id);
+      formData.append("type", type);
+      formData.append("priority", priority);
       formData.append("description", description);
       formData.append("_method", "PUT");
-
-      formData.append("file", file);
+      formData.append("image", image);
       this.editLoad = true;
       this.$api
-        .post(
-          `admin/contents/${content_id}/chapters/${chapter_id}/Categories/${titleid}`,
-          formData
-        )
+        .post(`admin/categories/${categoryid}`, formData)
         .then(({ data }) => {
           console.log("edited", data);
           this.refreshtitle();
@@ -491,8 +471,8 @@ export default {
           : this.selected.map((e) => e.id);
       this.$helper
         .notify(
-          "Are you sure you want to delete this fruitbay(s)? This action may be irreversible!",
-          "error",
+          "Are you sure you want to delete ? ",
+          "delete",
           true,
           "Yes, Delete!"
         )
@@ -595,8 +575,8 @@ export default {
 }
 
 select {
-  border: 1px solid #808080;
+  border: 1px solid #aaa9a9;
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.6rem 0.5rem;
 }
 </style>

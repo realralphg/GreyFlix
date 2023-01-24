@@ -1,12 +1,16 @@
 <template>
   <div class="wrapper vendor_onboard container">
     <div class="my_container auth q-pt-xl">
+      <div class="text-h6 q-mb-lg text-center text-weight-bold">
+        Login Your Account
+      </div>
       <form enctype="multipart/form-data" id="form" @submit.prevent="saveUser">
         <div class="input-wrap">
           <q-input
             color="orange"
             standout
             outlined
+            required
             bottom-slots
             v-model="data.email"
             label="Email"
@@ -35,9 +39,7 @@
           </q-input>
         </div>
 
-        <q-btn :loading="loading" type="submit" color="secondary">
-          Login
-        </q-btn>
+        <q-btn class="login" :loading="loading" type="submit"> Login </q-btn>
       </form>
     </div>
   </div>
@@ -121,6 +123,10 @@ p {
   background: #fff;
   padding: 2rem;
   margin-top: 3rem;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 20%), 0 2px 2px rgb(0 0 0 / 14%),
+    0 3px 1px -2px rgb(0 0 0 / 12%);
+  border-radius: 4px;
+  background: #fff;
 }
 
 .or h3 {
@@ -170,5 +176,13 @@ p {
 .connect img {
   width: 40px;
   margin-right: 1rem;
+}
+
+.login {
+  width: 100%;
+  background: #c1272d;
+  border-radius: 9.52192px;
+  padding: 1rem;
+  color: #fff;
 }
 </style>
