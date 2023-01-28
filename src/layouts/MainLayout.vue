@@ -1,15 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header class="bg-black row items-center" elevated>
-      <q-btn
-        flat
-        dense
-        round
-        icon="menu"
-        aria-label="Menu"
-        class="text-white nav__toggler"
-        @click="drawer = !drawer"
-      />
       <q-toolbar class="container justify-between">
         <div class="logo">
           <img src="/images/logo.png" alt="" />
@@ -17,32 +8,28 @@
         <div class="nav__links">
           <q-tabs indicator-color="accent" dense active-color="primary">
             <q-route-tab label="Home" ripple no-caps to="/home" exact />
-            <q-route-tab label="Music" ripple no-caps to="/" exact />
+            <q-route-tab
+              label="Music"
+              ripple
+              no-caps
+              :to="{ name: 'MusicStories' }"
+              exact
+            />
 
-            <q-route-tab label="Audio Stories" ripple no-caps to="/" exact />
+            <q-route-tab
+              label="Audio Stories"
+              ripple
+              no-caps
+              :to="{ name: 'AudioStories' }"
+              exact
+            />
             <q-route-tab
               label="Ticketing"
               ripple
               no-caps
-              to="/agrofarms"
+              :to="{ name: 'TicketPage' }"
               exact
             />
-            <!-- <q-route-tab label="Music" ripple no-caps to="/agrotech" exact />
-            <q-route-tab label="Arts" ripple no-caps to="/agrotech" exact />
-            <q-route-tab
-              label="VR Spaces"
-              ripple
-              no-caps
-              to="/agrotech"
-              exact
-            />
-            <q-route-tab
-              label="Join Community"
-              ripple
-              no-caps
-              to="/agrotech"
-              exact
-            /> -->
           </q-tabs>
         </div>
 
@@ -62,6 +49,16 @@
             <img src="https://cdn.quasar.dev/img/avatar.png" />
           </q-avatar>
 
+          <q-btn
+            flat
+            dense
+            round
+            icon="menu"
+            aria-label="Menu"
+            class="text-white nav__toggler"
+            @click="drawer = !drawer"
+          />
+
           <!-- <div class="connect">
             <q-btn no-caps class="bg-red q-pa-sm text-white">
               Connect Wallet <q-icon class="q-ml-sm" name="wallet" />
@@ -71,38 +68,28 @@
       </q-toolbar>
     </q-header>
 
-    <!-- <q-drawer
+    <q-drawer
       v-model="drawer"
       class="bg-secondary"
-      show-if-above
       :width="250"
-      :breakpoint="400"
+      :breakpoint="800"
     >
-      <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px">
-        <q-list padding>
-          <q-item clickable v-ripple>
-            <q-item-section avatar>
-              <q-icon name="dashboard" />
-            </q-item-section>
-            <q-item-section class="text-white"> Dashboard </q-item-section>
-          </q-item>
-        </q-list>
-      </q-scroll-area>
-
-      <q-img
-        class="absolute-top"
-        src="https://cdn.quasar.dev/img/material.png"
-        style="height: 150px"
-      >
-        <div class="absolute-bottom bg-transparent">
-          <q-avatar size="56px" class="q-mb-sm">
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
-          <div class="text-weight-bold">Razvan Stoenescu</div>
-          <div>@rstoenescu</div>
-        </div>
-      </q-img>
-    </q-drawer> -->
+      <q-list class="q-pa-md side">
+        <q-item to="/home" class="nav_item q-pt-xl"
+          ><i class="fa-solid fa-house-user"></i> Home
+        </q-item>
+        <q-item to="/music" class="text-white nav_item">
+          <i class="fa-solid fa-music"></i> Music
+        </q-item>
+        <q-item to="/audioStories" class="text-white nav_item"
+          ><i class="fa-solid fa-microphone"></i>
+          Audio Stories
+        </q-item>
+        <q-item to="/TicketPage" class="text-white nav_item"
+          ><i class="fa-solid fa-clock"></i> Ticketing
+        </q-item>
+      </q-list>
+    </q-drawer>
 
     <q-page-container>
       <router-view />
@@ -146,10 +133,23 @@ export default defineComponent({
 .logo img {
   width: 118px;
 }
+.side {
+  font-size: 1.3rem;
+}
 
-@media (max-width: 600px) {
+.nav_item {
+  margin: 1rem 0;
+}
+i {
+  margin-right: 0.7rem;
+}
+@media (max-width: 700px) {
   .nav__toggler {
     display: block;
+  }
+
+  .nav__links {
+    display: none;
   }
 }
 </style>

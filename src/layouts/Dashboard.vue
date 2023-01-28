@@ -16,7 +16,7 @@
         </div>
         <div class="nav__links">
           <q-tabs indicator-color="accent" dense active-color="primary">
-            <q-route-tab label="Home" ripple no-caps to="/" exact />
+            <!-- <q-route-tab label="Home" ripple no-caps to="/" exact />
             <q-route-tab label="Music" ripple no-caps to="/agrofoods" exact />
 
             <q-route-tab
@@ -25,15 +25,15 @@
               no-caps
               to="/agrofarms"
               exact
-            />
+            /> -->
             <!-- <q-route-tab label="Shorts" ripple no-caps to="/agrotech" exact /> -->
-            <q-route-tab
+            <!-- <q-route-tab
               label="Ticketing"
               ripple
               no-caps
               to="/agrotech"
               exact
-            />
+            /> -->
             <!-- <q-route-tab label="Arts" ripple no-caps to="/agrotech" exact />
             <q-route-tab
               label="VR Spaces"
@@ -86,11 +86,17 @@
     >
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px">
         <q-list padding>
-          <q-item clickable v-ripple>
+          <q-item :to="{ name: 'dashboard' }" clickable v-ripple>
             <q-item-section avatar>
               <q-icon name="dashboard" />
             </q-item-section>
             <q-item-section class="text-white"> Dashboard </q-item-section>
+          </q-item>
+          <q-item :to="{ name: 'Ticketing' }" clickable v-ripple>
+            <q-item-section avatar>
+              <q-icon name="fa-solid fa-clock" />
+            </q-item-section>
+            <q-item-section class="text-white"> Ticketing </q-item-section>
           </q-item>
         </q-list>
       </q-scroll-area>
@@ -104,8 +110,22 @@
           <q-avatar size="56px" class="q-mb-sm">
             <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
           </q-avatar>
-          <div class="text-weight-bold">Razvan Stoenescu</div>
-          <div>@rstoenescu</div>
+          <div class="text-weight-bold">
+            {{
+              this.$store.auth.userDetails !== []
+                ? this.$store.auth.userDetails.data.firstname +
+                  " " +
+                  this.$store.auth.userDetails.data.lastname
+                : "Hi, there"
+            }}
+          </div>
+          <div>
+            {{
+              this.$store.auth.userDetails !== []
+                ? this.$store.auth.userDetails.data.email
+                : "Hi, there"
+            }}
+          </div>
         </div>
       </q-img>
     </q-drawer>

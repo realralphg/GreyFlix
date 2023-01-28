@@ -97,7 +97,7 @@
 
       <div class="currentTimeContainer" style="text-align: center">
         <span class="currentTime">{{ `0.${currentTime}` }}</span>
-        <span class="totalTime"> {{ `0.${trackDuration}` }}</span>
+        <!-- <span class="totalTime"> {{ `0.${trackDuration}` }}</span> -->
         <!-- <span class="currentTime">{{ currentTime || fancyTimeFormat }}</span>
         <span class="totalTime"> {{ trackDuration || fancyTimeFormat }}</span> -->
         <!--<span style="color:black">({{ currentSong+1 }}/{{ musicPlaylist.length }})</span>-->
@@ -135,7 +135,8 @@ export default {
         {
           title: "Service Bell",
           artist: "Daniel Simion",
-          url: "https://soundbible.com/mp3/service-bell_daniel_simion.mp3",
+          url: "https://greyflix-api.greysoft.com.ng/stream/music/title/2059032982_1117732407.wav?preload=true&shared&wt=0&ctx=1121356223&build=1.0.0&mode=local&pov=30288d048cd6c6618043c54991793806",
+          //   url: "https://soundbible.com/mp3/service-bell_daniel_simion.mp3",
           image: "https://source.unsplash.com/crs2vlkSe98/400x400",
         },
         {
@@ -164,11 +165,6 @@ export default {
   mounted() {
     this.changeSong();
     this.audio.loop = false;
-  },
-  computed: {
-    fancyTimeFormat(s) {
-      return (s - (s %= 60)) / 60 + (9 < s ? ":" : ":0") + s;
-    },
   },
 
   methods: {

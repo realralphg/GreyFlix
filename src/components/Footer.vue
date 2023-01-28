@@ -92,6 +92,7 @@ p {
   font-size: 18.81px;
   line-height: 26px;
   color: #ffffff;
+  margin: 1rem 0;
 }
 
 .social_icons {
@@ -108,7 +109,7 @@ p {
   font-size: 22.8473px;
   line-height: 24px;
   color: #ffffff;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
 .input {

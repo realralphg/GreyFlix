@@ -1,7 +1,12 @@
 <template>
   <q-page class="page">
     <Hero />
-    <Watch :audios="audios" :largeRow="largeRow" name="Audio Stories" />
+    <Watch
+      :audios="audios"
+      :skeleton="skeleton"
+      :largeRow="largeRow"
+      name="Audio Stories"
+    />
     <Music :musics="musicData" />
     <Animations
       :movies="animations"
@@ -15,8 +20,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 import { defineComponent } from "vue";
 import Hero from "../components/Hero.vue";
 import Watch from "../components/Watch.vue";
@@ -42,6 +45,7 @@ export default defineComponent({
       movies: [],
       trendingMovies: [],
       largeRow: true,
+      skeleton: true,
       audios: [],
       musicData: [
         {
@@ -226,13 +230,24 @@ export default defineComponent({
 
   created() {
     this.getmusicstories();
+    this.getSTuff();
   },
   methods: {
     getmusicstories() {
+      this.skeleton = true;
       this.$api.get(`/audio/stories`).then((resp) => {
         console.log(resp);
         this.audios = resp.data.data;
+        this.skeleton = false;
       });
+    },
+
+    getSTuff() {
+      fetch("https://moon.lemonraise.com/api/campaign/personal")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
     },
   },
 });

@@ -1,10 +1,18 @@
 <template>
   <div class="wrapper">
     <div class="kl">
-      <h1 class="text-white text-h4">Hi Rebecca!</h1>
+      <h1 class="text-white text-h4">
+        {{
+          this.$store.auth.userDetails !== []
+            ? this.$store.auth.userDetails.data.firstname +
+              " " +
+              this.$store.auth.userDetails.data.lastname
+            : "Hi, there"
+        }}
+      </h1>
 
       <div class="hold q-mt-md">
-        <div class="row q-my-sm q-gutter-md items-center">
+        <div class="grid q-my-sm">
           <div class="hold">
             <q-input
               outlined
@@ -33,7 +41,8 @@
         </div>
       </div>
       <!-- {{ errors }} -->
-      <div class="row q-my-sm q-gutter-md items-center">
+      <!-- {{ this.$store.auth.userDetails }} -->
+      <div class="grid q-pt-md q-my-sm">
         <div class="hold">
           <q-input
             class="bg-black"
@@ -202,7 +211,7 @@ export default {
 .wrapper {
   background: #212121;
   height: 100%;
-  padding: 3rem;
+  padding: 1rem;
 }
 
 .kl {
@@ -219,12 +228,20 @@ export default {
   width: 100%;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  align-items: center;
+  gap: 1rem;
+}
+
 select {
   width: 100%;
   padding: 0 0.5rem;
   min-height: 55px;
   background: #000;
   color: #fff;
+  border: none;
 }
 
 select:focus {

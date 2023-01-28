@@ -11,7 +11,7 @@
             >Ready for the experience? Sign and get started</small
           >
           <div class="btn_wrap">
-            <q-btn class="text-white sign"> Sign Up </q-btn>
+            <q-btn to="/register" class="text-white sign"> Sign Up </q-btn>
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@
         <img src="/images/landing/2.png" alt="" />
       </div>
     </div>
-    <div class="row justify-between items-center">
+    <div class="row flexer justify-between items-center">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <img src="/images/landing/6.png" alt="" />
       </div>
@@ -44,23 +44,35 @@
     <div class="row justify-between items-center">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <p class="text-white text-weight-bold">
+          Enjoy Greytix a global self-service ticketing platform for live
+          experiences for everyone.
+        </p>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <img src="/images/landing/7.png" alt="" />
+      </div>
+    </div>
+    <div class="row flexer justify-between items-center">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <img src="/images/landing/4.png" alt="" />
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <p class="text-white text-weight-bold">
           Enjoy Africa’s finest creative collections leveraging emerging
           technologies.
         </p>
       </div>
-      <div class="col-md-6 col-sm-12 col-xs-12">
-        <img src="/images/landing/4.png" alt="" />
-      </div>
     </div>
     <div class="row justify-between items-center">
-      <div class="col-md-6 col-sm-12 col-xs-12">
-        <img src="/images/landing/5.png" alt="" />
-      </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <p class="text-white text-weight-bold">
           Experience historical monuments and artifacts first hand in our VR
           collections.
         </p>
+      </div>
+
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <img src="/images/landing/5.png" alt="" />
       </div>
     </div>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="hero text-center">
     <div class="hero__details">
-      <div class="heading">Welcome to GreyBitz</div>
+      <div class="heading">Welcome to Rabitz</div>
       <p class="smaller__heading">Explore contents and earn on the go!</p>
       <div class="input__wrap">
         <div class="input">
@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
 .hero {
-  height: 90vh;
+  height: 70vh;
   position: relative;
 }
 .hero__details {
@@ -77,5 +77,12 @@ export default {
   height: 46px;
   border-radius: 100px;
   width: 105px;
+}
+
+@media (max-width: 700px) {
+  .input {
+    width: 90%;
+    margin: 0 auto;
+  }
 }
 </style>
