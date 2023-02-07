@@ -59,7 +59,7 @@
         <ul>
           <li
             v-for="(item, index) in musicPlaylist"
-            v-bind:class="{ isActive: isCurrentSong(index) }"
+            :class="isCurrentSong(index) ? 'active' : 'not_active'"
             v-on:click="
               changeSong(index), (isPlaylistActive = !isPlaylistActive)
             "
@@ -300,7 +300,8 @@ export default {
       }
     },
     isCurrentSong(index) {
-      if (this.currentSong == index) {
+      if (this.currentSong === index) {
+        // console.log(this.currentSong, index);
         return true;
       }
       return false;
@@ -425,6 +426,21 @@ i {
 .text cite {
   opacity: 0.6;
 }
+
+.isActive span:nth-child(1) {
+  top: 5px;
+  transform: rotate(135deg);
+}
+
+.isActive span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+.isActive span:nth-child(3) {
+  top: 5px;
+  transform: rotate(-135deg);
+}
 .input_wrap {
   display: block;
   box-sizing: border-box;
@@ -459,9 +475,13 @@ i {
   color: white;
   margin-top: 2rem;
   padding: 0rem 0 2rem;
-  font-size: 15px;
+  font-size: 18px;
 
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.div .right p {
+  font-size: 20px;
 }
 
 .items li {
@@ -471,12 +491,11 @@ i {
   justify-content: flex-end;
   margin: 1rem 0;
 }
-// .items .center_place {
-//   display: grid;
-//   // grid-template-columns: repeat(3, 1fr);
-//   align-items: center;
-//   justify-content: flex-end;
-// }
+.active {
+  background: #161515;
+  backdrop-filter: blur(5px);
+  padding: 0.6rem;
+}
 
 .items .left_side {
   display: flex;

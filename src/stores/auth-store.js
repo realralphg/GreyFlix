@@ -9,6 +9,7 @@ export const useAuthStore = defineStore("auth", {
     reg_step: 1,
     token: null,
     userDetails:null,
+    ticket:{}
   }),
   getters: {
     registrationForm: (state) => state.registration_form,

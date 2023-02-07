@@ -4,8 +4,7 @@ export const useAuthStore = defineStore("auth", {
   state: () => ({
     token: "",
     userDetails: null,
-    products:null,
-    customer:null
+    ticket:{}
     // token: localStorage.getItem("token") || "",
   }),
   getters: {

@@ -101,6 +101,10 @@ img {
   border-bottom: none;
 }
 
+.nav__links .q-tab__label {
+  font-size: 19px;
+}
+
 // .auth .q-field__native {
 //   color: #fff;
 // }
@@ -233,5 +237,12 @@ a {
   .flexer {
     display: flex;
     flex-direction: column-reverse;
+  }
+
+  .my_container {
+    width: 100%;
+  }
+  .auth {
+    padding: 1rem;
   }
 }

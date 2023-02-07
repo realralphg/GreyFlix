@@ -230,7 +230,7 @@ export default defineComponent({
 
   created() {
     this.getmusicstories();
-    this.getSTuff();
+    // this.getSTuff();
   },
   methods: {
     getmusicstories() {
@@ -242,13 +242,13 @@ export default defineComponent({
       });
     },
 
-    getSTuff() {
-      fetch("https://moon.lemonraise.com/api/campaign/personal")
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        });
-    },
+    // getSTuff() {
+    //   fetch("https://moon.lemonraise.com/api/campaign/personal")
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //     });
+    // },
   },
 });
 </script>

@@ -2,14 +2,21 @@
   <div class="purchase_wrap">
     <div class="purchase">
       <p>Complete your registration</p>
-      <h4>Android Users Hangout</h4>
-      <h5>Organized by Lorem Management</h5>
+      <h4>{{ this.$store.auth.ticket.name }}</h4>
+      <h5>{{ this.$store.auth.ticket.description }}</h5>
       <p>
-        <i class="fa-solid fa-calendar-days"></i> Fri 24th June, 2022 at 10 AM
+        <i class="fa-solid fa-calendar-days"></i> Event start date:
+        {{ this.$store.auth.ticket.event.start_date }}
+        <span>{{ this.$store.auth.ticket.event.start_time }}</span>
       </p>
       <p>
-        <i class="fa-solid fa-location-dot"></i> Ahmed Musa Neighborhood Centre,
-        Kaduna
+        <i class="fa-solid fa-calendar-days"></i> Event end date
+        {{ this.$store.auth.ticket.event.end_date }}
+        <span>{{ this.$store.auth.ticket.event.end_time }}</span>
+      </p>
+      <p>
+        <i class="fa-solid fa-location-dot"></i>
+        {{ this.$store.auth.ticket.event.location }}
       </p>
 
       <div class="order">
@@ -39,23 +46,23 @@
               </div>
 
               <div class="left_side">
-                <div class="serialnum">5000</div>
+                <div class="serialnum">{{ this.$store.auth.ticket.price }}</div>
               </div>
 
               <div class="center_place">
                 <!-- <div class="songname">He is able</div> -->
                 <div class="actions">
-                  <button class="add">
+                  <button @click="add" class="add">
                     <i class="fa-solid fa-plus"></i>
                   </button>
                   <input type="text" v-model="qty" name="" id="" />
-                  <button class="download">
+                  <button @click="minus" class="download">
                     <i class="fa-solid fa-minus"></i>
                   </button>
                 </div>
               </div>
 
-              <div class="artist_name">20000</div>
+              <div class="artist_name">{{ total }}</div>
             </li>
           </ul>
         </div>
@@ -64,29 +71,129 @@
       <form>
         <div class="input">
           <q-item-label class="text-white q-pb-xs">Full Name</q-item-label>
-          <input dense outlined name="title" label="Title" />
+          <input
+            required
+            v-model="data.fullname"
+            dense
+            outlined
+            name="Fullname"
+            label="Title"
+          />
+        </div>
+        <div class="input">
+          <q-item-label class="text-white q-pb-xs">Email</q-item-label>
+          <input
+            v-model="data.email"
+            type="email"
+            required
+            dense
+            outlined
+            name="email"
+            label="Email"
+          />
         </div>
         <div class="input">
           <q-item-label class="text-white q-pb-xs">Phone</q-item-label>
-          <input dense outlined name="title" label="Title" />
+          <input
+            dense
+            v-model="data.phone"
+            required
+            outlined
+            type="tel"
+            name="phone"
+            label="Phone"
+          />
         </div>
 
-        <q-btn class="q-mt-lg q-px-xl" color="primary"> Pay </q-btn>
+        <!-- <q-btn class="q-mt-lg q-px-xl" color="primary"> Pay </q-btn> -->
       </form>
+
+      <div class="text-center">
+        <PaystackHandler
+          no-caps
+          unelevated
+          dont-verify
+          class="q-mt-lg q-px-xl"
+          color="primary"
+          label="Continue"
+          icon="fa-solid fa-credit-card"
+          :endpoint="{
+            init: `/events/${this.$store.auth.ticket.event.id}/tickets/${this.$store.auth.ticket.id}`,
+            verify: false,
+          }"
+          :confirmation="{
+            message: `You are about to buy a ticket for ${this.$store.auth.ticket.event.name} for ${amount}, do you want to continue?`,
+            title: 'Confirm Ticket Purchase',
+            ok: 'Yes, Continue',
+            cancel: 'No, Cancel',
+            color: 'info',
+          }"
+          :data="{
+            redirect: `${location.origin}${
+              $router.resolve({ name: 'payment.verify' }).href
+            }`,
+            qty: 1,
+            fullname: data.fullname,
+            email: data.email,
+            phone: data.phone,
+            amount: amount,
+          }"
+          @success="() => {}"
+          @error="() => {}"
+          @close="() => {}"
+          @init="() => {}"
+          @destroyed="() => {}"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import PaystackHandler from "../components/PaystackHandler.vue";
 export default {
   setup() {
     return {};
   },
 
+  components: {
+    PaystackHandler,
+  },
+
   data() {
     return {
       qty: 1,
+      total: this.$store.auth.ticket.price,
+      location: window.location,
+      amount: "",
+      data: {},
     };
+  },
+
+  methods: {
+    add() {
+      this.qty++;
+      let amount = parseInt(this.$store.auth.ticket.price);
+      this.total = amount * this.qty;
+      this.amount = this.total;
+    },
+    minus() {
+      this.qty--;
+      let amount = parseInt(this.$store.auth.ticket.price);
+      this.total = this.total - amount;
+      this.amount = this.total;
+
+      if (this.qty === 0) {
+        this.qty = 1;
+        this.$q.notify({
+          message: "Cannot Subtract!",
+          color: "red",
+          position: "top",
+        });
+
+        this.total = amount;
+      }
+    },
   },
 };
 </script>
@@ -97,6 +204,11 @@ h4 {
   color: white;
   margin: 0.5rem 0;
 }
+
+h5 {
+  font-size: 18px;
+  line-height: 1.4;
+}
 p {
   color: white;
 }
@@ -106,7 +218,7 @@ i {
 }
 
 .input {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 form input {
   background: #f2f2f2;
@@ -123,9 +235,10 @@ input:focus {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 90vh;
+  height: 100%;
   width: 70%;
   margin: 0 auto;
+  padding: 2rem 0;
 }
 
 .order {
@@ -208,6 +321,10 @@ input:focus {
 @media (max-width: 700px) {
   .purchase_wrap {
     width: 90%;
+  }
+
+  .items li {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 </style>

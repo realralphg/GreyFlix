@@ -32,7 +32,7 @@
     </div>
     <div class="row flexer justify-between items-center">
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <img src="/images/landing/6.png" alt="" />
+        <img src="/images/landing/3.png" alt="" />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <p class="text-white text-weight-bold">

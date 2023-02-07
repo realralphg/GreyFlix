@@ -27,7 +27,7 @@
               label="Ticketing"
               ripple
               no-caps
-              :to="{ name: 'TicketPage' }"
+              :to="{ name: 'EventsPage' }"
               exact
             />
           </q-tabs>
@@ -75,17 +75,20 @@
       :breakpoint="800"
     >
       <q-list class="q-pa-md side">
+        <div class="logo">
+          <img src="/images/logo.png" alt="" />
+        </div>
         <q-item to="/home" class="nav_item q-pt-xl"
           ><i class="fa-solid fa-house-user"></i> Home
         </q-item>
-        <q-item to="/music" class="text-white nav_item">
+        <q-item to="/MusicStories" class="text-white nav_item">
           <i class="fa-solid fa-music"></i> Music
         </q-item>
-        <q-item to="/audioStories" class="text-white nav_item"
+        <q-item to="/AudioStories" class="text-white nav_item"
           ><i class="fa-solid fa-microphone"></i>
           Audio Stories
         </q-item>
-        <q-item to="/TicketPage" class="text-white nav_item"
+        <q-item to="/EventsPage" class="text-white nav_item"
           ><i class="fa-solid fa-clock"></i> Ticketing
         </q-item>
       </q-list>
@@ -121,6 +124,7 @@ export default defineComponent({
 .right {
   display: flex;
   gap: 0.65rem;
+  align-items: center;
 }
 .nav__links ul {
   text-transform: capitalize;

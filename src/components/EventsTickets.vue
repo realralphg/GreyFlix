@@ -1,40 +1,57 @@
 <template>
   <div class="nft__section container">
     <div style="font-size: 30px" class="text-white head q-mb-xl q-pa-sm">
-      Upcoming Events
+      Event Tickets
     </div>
-    <div class="row_Nfts">
-      <div v-for="ticket in tickets" :key="ticket.id" class="music_hold">
+    <div v-if="datas.length > 0" class="row_Nfts">
+      <div v-for="data in datas" :key="data.id" class="music_hold">
         <div class="music_top">
-          <img class="" :src="ticket.image" alt="" />
+          <img class="" :src="data.event.category.image_url" alt="" />
 
           <div
             class="row text-white q-px-md top fee items-center justify-between"
           >
-            <p>{{ ticket.title }}</p>
-            <p>{{ ticket.price }}</p>
+            <p>{{ data.name }}</p>
+            <p>
+              <i class="fa-solid q-mr-sm fa-location-dot"></i
+              >{{ data.event.location }}
+            </p>
           </div>
         </div>
         <div class="artists">
           <div class="">
-            <p>{{ ticket.date }}</p>
+            <div class="row items-center justify-between">
+              <p>Sales Start Date: {{ data.sales_start_date }}</p>
+              <p>Sales End Date: {{ data.sales_end_date }}</p>
+            </div>
+
             <p>
-              {{ ticket.desc }}
+              {{ data.description }}
             </p>
           </div>
 
-          <q-btn :to="{ name: 'TicketDetail' }" class="view text-white q-mt-md">
-            View Event
+          <q-btn
+            :to="{
+              name: 'TicketDetail',
+              params: { ticketid: data.id, eventID: data.event.id },
+            }"
+            class="view text-white q-mt-md"
+          >
+            View Ticket
           </q-btn>
         </div>
       </div>
+    </div>
+
+    <div v-else style="font-size: 20px" class="text-white q-mb-xl q-pa-sm">
+      This event has no tickets
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["tickets"],
+  props: ["datas"],
 };
 </script>
 
@@ -129,7 +146,7 @@ p {
 .artists p {
   /* margin-top: 1rem; */
   padding: 0.2rem 0.7rem;
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -139,10 +156,20 @@ p {
   align-items: center;
   max-width: 900px;
   margin: 0 auto;
+  padding-bottom: 4rem;
   gap: 2rem;
 }
 
 .badge {
   width: 35px !important;
+}
+@media (max-width: 500px) {
+  .nft__section {
+    padding: 1rem 1rem 5rem;
+  }
+
+  .row_Nfts {
+    gap: 5rem;
+  }
 }
 </style>

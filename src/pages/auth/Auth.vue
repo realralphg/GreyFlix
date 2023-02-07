@@ -421,13 +421,13 @@
               </div>
             </div>
           </div>
-          <div class="row items-center">
+          <!-- <div class="row items-center">
             <q-checkbox color="red" v-model="valCheck" />
             <p>
               I have read and agreed to
               <q-btn class="terms">Terms and Conditions</q-btn>.
             </p>
-          </div>
+          </div> -->
 
           <div class="or text-center q-mt-md">
             <h3>Or</h3>

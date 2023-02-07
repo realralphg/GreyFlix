@@ -160,6 +160,7 @@ export default defineComponent({
 .right {
   display: flex;
   gap: 0.65rem;
+  align-items: center;
 }
 .nav__links ul {
   text-transform: capitalize;
