@@ -12,7 +12,7 @@
       ></i>
     </q-btn>
 
-    <q-dialog v-model="dialog" persistent :position="position">
+    <q-dialog v-model="dialog" :position="position">
       <q-card style="width: 350px">
         <q-linear-progress :value="0.6" color="pink" />
         <q-card-section class="row items-center no-wrap">
