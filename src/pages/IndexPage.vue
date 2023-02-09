@@ -7,14 +7,15 @@
       :largeRow="largeRow"
       name="Audio Stories"
     />
-    <Music :musics="musicData" />
-    <Animations
+    <Music :musics="audios" />
+    <EventsData :datas="data" />
+    <!-- <Animations
       :movies="animations"
       :largeRow="largeRow"
       name="Animated Movies"
-    />
+    /> -->
     <NFTs :nfts="Nfts" />
-    <Vr :vrs="virtualR" />
+    <!-- <Vr :vrs="virtualR" /> -->
     <Footer />
   </q-page>
 </template>
@@ -28,7 +29,7 @@ import NFTs from "../components/NFTs.vue";
 import Animations from "../components/Animations.vue";
 import Vr from "../components/Vr.vue";
 import Footer from "../components/Footer.vue";
-
+import EventsData from "../components/EventsData.vue";
 export default defineComponent({
   name: "IndexPage",
   components: {
@@ -39,6 +40,7 @@ export default defineComponent({
     Animations,
     Vr,
     Footer,
+    EventsData,
   },
   data() {
     return {
@@ -47,6 +49,7 @@ export default defineComponent({
       largeRow: true,
       skeleton: true,
       audios: [],
+      data: [],
       musicData: [
         {
           id: 1,
@@ -230,7 +233,7 @@ export default defineComponent({
 
   created() {
     this.getmusicstories();
-    // this.getSTuff();
+    this.getEvents();
   },
   methods: {
     getmusicstories() {
@@ -242,13 +245,19 @@ export default defineComponent({
       });
     },
 
-    // getSTuff() {
-    //   fetch("https://moon.lemonraise.com/api/campaign/personal")
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //     });
-    // },
+    getEvents() {
+      this.loading = true;
+      this.$api
+        .get(`events`)
+        .then(({ data }) => {
+          console.log("added", data);
+          this.data = data.data;
+          this.loading = false;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
   },
 });
 </script>

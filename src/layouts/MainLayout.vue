@@ -48,6 +48,46 @@
           <q-avatar>
             <img src="https://cdn.quasar.dev/img/avatar.png" />
           </q-avatar>
+          <q-btn label="Account" color="red">
+            <q-menu class="menu">
+              <q-list style="min-width: 120px">
+                <q-item
+                  v-if="this.$store.auth.token"
+                  :to="{ name: 'dashboard' }"
+                  clickable
+                  v-close-popup
+                >
+                  <q-item-section>My Account</q-item-section>
+                </q-item>
+                <!-- <q-item
+                  v-if="this.$store.auth.token"
+                  :to="{ name: 'help' }"
+                  clickable
+                  v-close-popup
+                >
+                  <q-item-section>Help Center</q-item-section>
+                </q-item> -->
+                <q-separator />
+
+                <q-item
+                  v-if="this.$store.auth.token"
+                  :to="{ name: 'logout' }"
+                  clickable
+                  v-close-popup
+                >
+                  <q-item-section>Sign Out</q-item-section>
+                </q-item>
+                <q-item
+                  v-else
+                  :to="{ name: 'home.login' }"
+                  clickable
+                  v-close-popup
+                >
+                  <q-item-section>Sign In</q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
+          </q-btn>
 
           <q-btn
             flat

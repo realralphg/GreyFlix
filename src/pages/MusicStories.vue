@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <Music :musics="musicData" />
+    <Music :musics="audios" />
 
     <Footer />
   </q-page>
@@ -51,6 +51,7 @@ export default {
 
   data() {
     return {
+      audios: [],
       musicData: [
         {
           id: 1,
@@ -145,6 +146,20 @@ export default {
         },
       ],
     };
+  },
+
+  created() {
+    this.getmusicstories();
+  },
+  methods: {
+    getmusicstories() {
+      this.skeleton = true;
+      this.$api.get(`/audio/stories`).then((resp) => {
+        console.log(resp);
+        this.audios = resp.data.data;
+        this.skeleton = false;
+      });
+    },
   },
 };
 </script>

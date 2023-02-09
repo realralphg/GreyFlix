@@ -3,25 +3,40 @@
     <div style="font-size: 30px" class="text-white head q-pa-sm">
       Best Music
     </div>
+
     <div class="row-posts">
       <div v-for="music in musics" :key="music.id" class="music_hold">
         <div class="music_top">
-          <img class="" :src="music.image" alt="" />
+          <img class="" :src="music.cover_url" alt="" />
 
-          <div class="row justify-between align-center top_det">
-            <p>{{ music.type }}</p>
-            <i class="ri-play-fill text-white"></i>
+          <div class="row justify-between items-center top_det">
+            <p>{{ music.title }}</p>
+            <Player
+              :playing="playing"
+              :playingMusic="music"
+              :music="music.stream"
+            />
           </div>
         </div>
-        <p class="q-pa-sm">{{ music.desc }}</p>
+        <p class="q-pa-sm">{{ music.info }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Player from "../components/Player.vue";
 export default {
   props: ["musics"],
+  components: {
+    Player,
+  },
+
+  data() {
+    return {
+      playing: false,
+    };
+  },
 };
 </script>
 
@@ -41,7 +56,7 @@ p {
 .music_hold {
   background: #151515;
   padding: 0.65rem;
-  height: 300px;
+  height: 290px;
 }
 
 .music_hold img {

@@ -98,10 +98,15 @@ export default {
     this.$q.loading.show({ spinner: QSpinnerPuff });
     this.loading = true;
     const ref = this.$route.query.reference || this.$route.params.ref;
-    console.log(this.$route);
-    const query = `?trxref=${ref}&reference=${ref}`;
+    console.log(ref);
+    const query = `?reference=${ref}`;
+    // const query = `?trxref=${ref}&reference=${ref}`;
+    // /payment/paystack/verify${query}
+    console.log(query);
     this.$api
-      .get(`/payment/paystack/verify${query}`)
+      .get(
+        `/events/${this.$store.auth.ticket.event.id}/tickets/${this.$store.auth.ticket.id}/verify/${query}`
+      )
       .then(({ data }) => {
         this.loading = false;
         this.$q.loading.hide();

@@ -138,6 +138,7 @@ export default {
           console.log(data);
           const payload = data.data.payload || data.payload || {};
           if (this.$q.platform.is.mobile) {
+            console.log("mobile");
             this.$q.loading.hide();
             return this.paystack(
               data.data.amount,
@@ -251,11 +252,14 @@ export default {
     },
     paystack(amount = 0, ref = null) {
       return PaystackPop.setup({
-        key: this.$boot.settings.paystack_public_key, // Replace with your public key
-        email: this.$user.email,
+        key: "pk_test_9787e124516f80ee1b6c0567545289fa1e528f76", // Replace with your public key
+        // key: this.$boot.settings.paystack_public_key, // Replace with your public key
+        email: this.$store.auth.userDetails.data.email,
         amount: amount * 100,
         ref: ref,
-        label: this.$user.fullname,
+        label:
+          this.$store.auth.userDetails.data.firstname +
+          this.$store.auth.userDetails.data.lastname,
         onClose: () => {
           this.$helper.notify("Transaction cancelled.", "error");
           this.$api.delete("/payment/terminate", {

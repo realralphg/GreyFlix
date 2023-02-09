@@ -45,7 +45,7 @@ p {
 .nft__section {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15.7317px);
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 44.4188px;
   margin: 4rem auto;
 }
@@ -119,5 +119,12 @@ p {
 
 .badge {
   width: 35px !important;
+}
+
+@media (max-width: 500px) {
+  .row_Nfts {
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
 }
 </style>

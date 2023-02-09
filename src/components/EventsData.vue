@@ -63,7 +63,7 @@ p {
   padding: 2rem;
   margin-top: 2rem;
   border-radius: 44.4188px;
-  width: 100%;
+  width: 90%;
   margin: 4rem auto;
 }
 .music_hold {
@@ -162,6 +162,7 @@ p {
 
   .row_Nfts {
     gap: 5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
 </style>

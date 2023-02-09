@@ -4,7 +4,7 @@
       {{ name }}
     </div>
     <div class="row-posts">
-      <div v-if="skeleton" class="skeleton row items-center">
+      <div v-if="skeleton" class="skeleton no-wrap row items-center">
         <q-skeleton v-for="n in 5" :key="n" width="150px" height="200px" />
       </div>
       <div

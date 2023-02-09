@@ -23,9 +23,14 @@
           Start Date: {{ data.sales_end_date }}, at {{ data.sales_end_time }}
         </p>
         <p>Category: Sports</p>
-        <q-btn :to="{ name: 'Purchase' }" color="primary"
-          >Purchase Ticket</q-btn
-        >
+
+        <div class="grid">
+          <q-btn :to="{ name: 'Purchase' }" color="primary"
+            >Purchase Ticket</q-btn
+          >
+
+          <q-btn @click="copy" color="primary"> Copy event link </q-btn>
+        </div>
       </div>
     </div>
   </div>
@@ -59,6 +64,16 @@ export default {
   },
 
   methods: {
+    copy() {
+      let Url = window.location.href;
+      // console.log(document.execCommand("Copy"), Url);
+      navigator.clipboard.writeText(Url);
+      this.$q.notify({
+        message: "Ticket link copied!",
+        color: "green",
+        position: "top",
+      });
+    },
     getTicket() {
       this.loading = true;
       let params = this.$router.currentRoute.value.params;
@@ -114,6 +129,11 @@ p.fee {
   backdrop-filter: blur(7.86584px);
   border-radius: 44.4188px;
   padding: 2rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
 }
 
 @media (max-width: 500px) {
