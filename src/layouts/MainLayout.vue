@@ -24,7 +24,7 @@
               exact
             />
             <q-route-tab
-              label="Ticketing"
+              label="Events"
               ripple
               no-caps
               :to="{ name: 'EventsPage' }"

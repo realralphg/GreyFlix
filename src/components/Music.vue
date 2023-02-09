@@ -7,7 +7,15 @@
     <div class="row-posts">
       <div v-for="music in musics" :key="music.id" class="music_hold">
         <div class="music_top">
-          <img class="" :src="music.cover_url" alt="" />
+          <router-link
+            style="display: flex; width: 200px"
+            :to="{
+              name: 'audio.content',
+              params: { contentid: music.id, slug: music.slug },
+            }"
+          >
+            <img class="" :src="music.cover_url" alt="" />
+          </router-link>
 
           <div class="row justify-between items-center top_det">
             <p>{{ music.title }}</p>

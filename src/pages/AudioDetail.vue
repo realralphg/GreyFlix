@@ -34,7 +34,11 @@
         <div class="input">
           <div class="input_wrap">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Search within tracks" />
+            <input
+              type="text"
+              v-model="text"
+              placeholder="Search within tracks"
+            />
           </div>
         </div>
       </div>
@@ -58,7 +62,7 @@
         </ul>
         <ul>
           <li
-            v-for="(item, index) in musicPlaylist"
+            v-for="(item, index) in filteredAudios"
             :class="isCurrentSong(index) ? 'active' : 'not_active'"
             v-on:click="
               changeSong(index), (isPlaylistActive = !isPlaylistActive)
@@ -184,6 +188,7 @@ export default {
   data() {
     return {
       song: {},
+      text: "",
       playsong: false,
       loading: true,
       audio: "",
@@ -243,6 +248,14 @@ export default {
 
     currentTime() {
       this.currentTime = Math.round(this.currentTime);
+    },
+  },
+
+  computed: {
+    filteredAudios: function () {
+      return this.musicPlaylist.filter((audio) => {
+        return audio.title.match(this.text);
+      });
     },
   },
 
@@ -456,6 +469,10 @@ i {
 .input_wrap input {
   background: transparent;
   border: none;
+  color: white;
+}
+.input_wrap input:focus {
+  outline: none;
 }
 .input_wrap i {
   margin-right: 1rem;
@@ -475,13 +492,13 @@ i {
   color: white;
   margin-top: 2rem;
   padding: 0rem 0 2rem;
-  font-size: 18px;
+  font-size: 15px;
 
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .div .right p {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .items li {
@@ -542,6 +559,10 @@ i {
   background: #161515;
   backdrop-filter: blur(5px);
   width: 100%;
+}
+
+.player .details {
+  white-space: nowrap;
 }
 
 .player img {
