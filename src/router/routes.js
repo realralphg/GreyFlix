@@ -13,7 +13,7 @@ const routes = [
       { path: 'event/:eventID/TicketDetail/:ticketid', component: () => import('pages/TicketDetail.vue'),name:'TicketDetail' },
       { path: '/Purchase', component: () => import('pages/Purchase.vue'),name:'Purchase' },
       { path: '/payment/verify', component: () => import('pages/PaymentConfirmation.vue'),name:'payment.verify' },
-      { path: '/payment/verify/:ref', component: () => import('pages/PaymentConfirmation.vue'),name:'user.payment.verify.ref' },
+      // { path: '/payment/verify/:ref', component: () => import('pages/PaymentConfirmation.vue'),name:'user.payment.verify.ref' },
     ]
   },
   {

@@ -8,6 +8,31 @@
       <q-icon v-if="tooltipIcon" :name="tooltipIcon" /> {{ tooltip }}
     </q-tooltip>
   </q-btn>
+
+  <div v-if="showVerifiedmessage" class="sho">
+    <div class="ticket-wrap">
+      <p class="text-center text-weight-bold text-green">
+        {{ verifiedMsg }}
+      </p>
+      <div class="detailwrap">
+        <div class="left bg-white q-pa-sm">
+          <img :src="verifiedData.qr_code" alt="" />
+        </div>
+        <div class="right">
+          <p>
+            User: {{ verifiedData.user.firstname }}
+            {{ verifiedData.user.lastname }}
+          </p>
+          <p>Name: {{ verifiedData.ticket.event.name }}</p>
+          <p>Location: {{ verifiedData.ticket.event.location }}</p>
+          <!-- <p class="fee">Fee: ₦{{ this.$store.auth.loggedPay }}</p> -->
+          <p>Description: {{ verifiedData.ticket.description }}</p>
+
+          <p>Category: {{ verifiedData.ticket.event.category.title }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -80,16 +105,20 @@ export default {
       handler(data) {},
     },
   },
-  setup() {
-    return {};
+  data() {
+    return {
+      showVerifiedmessage: false,
+      verifiedData: {},
+      verifiedMsg: "",
+    };
   },
   created() {
     this.$emit("init", this);
   },
   mounted() {
     this.$emit("init", this);
-
-    // console.log(this.$store.auth.ticket, this.data.amount);
+    console.log(this.$store.auth.loggedPay);
+    // console.log("first");
     if (this.$route.query.trxref && !this.dontVerify) {
       this.verifyPayment(this.$route.query.trxref);
     }
@@ -113,11 +142,9 @@ export default {
             title: this.confirmation.title || "Confirm",
           })
           .onOk(() => {
-            this.$store.auth.loggedPay = this.data;
             this.initialize();
           });
       } else {
-        this.$store.auth.loggedPay = this.data;
         this.initialize();
       }
     },
@@ -132,10 +159,6 @@ export default {
       this.$q.loading.show();
       let endpoint =
         typeof this.endpoint === "object" ? this.endpoint.init : this.endpoint;
-
-      console.log(this.data);
-      this.$store.auth.loggedPay = this.data;
-      console.log(this.$store.auth.loggedPay);
       this.$api
         .post(endpoint || this.initEndpoint, {
           ...this.data,
@@ -143,10 +166,7 @@ export default {
         })
         .then(({ data }) => {
           this.$emit("initialized", data, this.data);
-          // console.log(data, this.data);
-          this.$store.auth.loggedPay = data.data.amount;
-          console.log(this.$store.auth.loggedPay);
-
+          console.log(data);
           const payload = data.data.payload || data.payload || {};
           if (this.$q.platform.is.mobile) {
             console.log("mobile");
@@ -194,6 +214,9 @@ export default {
         })
         .then(({ data }) => {
           console.log(data.data);
+          this.verifiedData = data.data[0];
+          this.showVerifiedmessage = true;
+          this.verifiedMsg = data.message;
 
           this.$q.loading.hide();
           this.$emit("verified", data);

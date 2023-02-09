@@ -122,7 +122,11 @@
             verify: false,
           }"
           :confirmation="{
-            message: `You are about to buy a ticket for ${this.$store.auth.ticket.event.name} for ${amount}, do you want to continue?`,
+            message: `You are about to buy a ticket for ${
+              this.$store.auth.ticket.event.name
+            } for ₦${
+              amount === '' ? this.$store.auth.ticket.price : amount
+            }, do you want to continue?`,
             title: 'Confirm Ticket Purchase',
             ok: 'Yes, Continue',
             cancel: 'No, Cancel',
@@ -132,11 +136,11 @@
             redirect: `${location.origin}${
               $router.resolve({ name: 'payment.verify' }).href
             }`,
-            qty: 1,
+            qty: qty,
             fullname: data.fullname,
             email: data.email,
             phone: data.phone,
-            amount: amount,
+            amount: amount === '' ? this.$store.auth.ticket.price : amount,
           }"
           @success="() => {}"
           @error="() => {}"
@@ -321,6 +325,15 @@ input:focus {
 @media (max-width: 700px) {
   .purchase_wrap {
     width: 90%;
+  }
+
+  .items li {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  .purchase_wrap {
+    max-width: 60%;
   }
 
   .items li {

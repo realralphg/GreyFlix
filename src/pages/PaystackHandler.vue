@@ -83,14 +83,14 @@ export default {
   setup() {
     return {};
   },
+
   created() {
     this.$emit("init", this);
   },
   mounted() {
     this.$emit("init", this);
-
-    // console.log(this.$store.auth.ticket, this.data.amount);
     if (this.$route.query.trxref && !this.dontVerify) {
+      console.log(this.$route.query.trxref);
       this.verifyPayment(this.$route.query.trxref);
     }
   },
@@ -113,11 +113,9 @@ export default {
             title: this.confirmation.title || "Confirm",
           })
           .onOk(() => {
-            this.$store.auth.loggedPay = this.data;
             this.initialize();
           });
       } else {
-        this.$store.auth.loggedPay = this.data;
         this.initialize();
       }
     },
@@ -132,10 +130,6 @@ export default {
       this.$q.loading.show();
       let endpoint =
         typeof this.endpoint === "object" ? this.endpoint.init : this.endpoint;
-
-      console.log(this.data);
-      this.$store.auth.loggedPay = this.data;
-      console.log(this.$store.auth.loggedPay);
       this.$api
         .post(endpoint || this.initEndpoint, {
           ...this.data,
@@ -143,10 +137,7 @@ export default {
         })
         .then(({ data }) => {
           this.$emit("initialized", data, this.data);
-          // console.log(data, this.data);
-          this.$store.auth.loggedPay = data.data.amount;
-          console.log(this.$store.auth.loggedPay);
-
+          console.log(data);
           const payload = data.data.payload || data.payload || {};
           if (this.$q.platform.is.mobile) {
             console.log("mobile");
@@ -165,22 +156,19 @@ export default {
         })
         .catch((e) => {
           this.$q.loading.hide();
-          this.$q.notify({
-            message: "Hey, Please fill in all fields",
-            color: "red",
-            position: "top",
-          });
-          // let error = this.$plugins.reader.error(e);
-          // this.$helper.notify(error.message || error, error.status || "error");
-          // this.$emit("error", error);
+          let error = this.$plugins.reader.error(e);
+          this.$helper.notify(error.message || error, error.status || "error");
+          this.$emit("error", error);
         });
     },
     verifyPayment(reference) {
-      console.log("first");
+      console.log(reference);
       let endpoint =
         typeof this.endpoint === "object"
           ? this.endpoint.verify
           : this.endpoint;
+
+      console.log(endpoint);
       if (!endpoint) {
         return;
       }
@@ -193,8 +181,6 @@ export default {
           },
         })
         .then(({ data }) => {
-          console.log(data.data);
-
           this.$q.loading.hide();
           this.$emit("verified", data);
 
@@ -212,7 +198,10 @@ export default {
             this.$helper
               .notify({
                 status: this.successMessage.color || "info",
-                message: data.message,
+                message: (this.successMessage.message || "").replace(
+                  "{amount}",
+                  amount
+                ),
                 alert: true,
                 ok: this.successMessage.ok,
                 cancel: this.successMessage.cancel,
@@ -291,51 +280,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-p {
-  color: white;
-  font-size: 16px;
-}
-
-p.fee {
-  font-weight: 700;
-  font-size: 20px;
-}
-.ticket-wrap {
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  height: 90vh;
-  justify-content: center;
-  align-items: center;
-}
-.detailwrap {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(7.86584px);
-  border-radius: 44.4188px;
-  padding: 2rem;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 1rem;
-}
-
-@media (max-width: 500px) {
-  .ticket-wrap {
-    height: 100%;
-    padding: 2rem 0;
-  }
-
-  .detailwrap {
-    padding: 1rem;
-  }
-}
-</style>

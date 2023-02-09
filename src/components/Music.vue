@@ -24,6 +24,7 @@
               :playingMusic="music"
               :music="music.stream"
             />
+            <!-- <Playermix :playingMusic="music" :music="music.stream" /> -->
           </div>
         </div>
         <p class="q-pa-sm">{{ music.info }}</p>
@@ -34,10 +35,12 @@
 
 <script>
 import Player from "../components/Player.vue";
+import Playermix from "../components/Playermix.vue";
 export default {
   props: ["musics"],
   components: {
     Player,
+    Playermix,
   },
 
   data() {

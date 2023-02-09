@@ -41,6 +41,7 @@ export default {
   data() {
     return {
       playing: false,
+      alreadyPlaying: false,
     };
   },
   setup() {
