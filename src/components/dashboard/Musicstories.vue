@@ -4,9 +4,8 @@
       <h1 class="text-white text-h4">
         {{
           this.$store.auth.userDetails !== []
-            ? this.$store.auth.userDetails.data.firstname +
-              " " +
-              this.$store.auth.userDetails.data.lastname
+            ? `Hi, there ${this.$store.auth.userDetails.data.firstname}
+              ${this.$store.auth.userDetails.data.lastname}`
             : "Hi, there"
         }}
       </h1>
@@ -267,6 +266,14 @@ select:focus {
 @media (max-width: 768px) {
   .row {
     flex-wrap: wrap;
+  }
+
+  .kl {
+    padding: 0.5rem;
+  }
+
+  .wrapper {
+    padding: 0.5rem;
   }
 }
 </style>

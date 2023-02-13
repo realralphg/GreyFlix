@@ -124,7 +124,7 @@
           Audio Stories
         </q-item>
         <q-item to="/EventsPage" class="text-white nav_item"
-          ><i class="fa-solid fa-clock"></i> Ticketing
+          ><i class="fa-solid fa-clock"></i> Events
         </q-item>
       </q-list>
     </q-drawer>
@@ -189,6 +189,11 @@ i {
 
   .nav__links {
     display: none;
+  }
+}
+@media (max-width: 380px) {
+  .logo img {
+    width: 80px;
   }
 }
 </style>

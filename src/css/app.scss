@@ -15,6 +15,10 @@ img {
   width: 100%;
 }
 
+.style .q-table__title {
+  color: #fff;
+}
+
 .heading {
   font-family: "Raleway";
   font-style: normal;
@@ -207,6 +211,12 @@ a {
   padding: 0 24px;
 }
 
+.q-card .close {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
 @media (max-width: 1200px) {
   .heading {
     font-size: 70px;
@@ -232,11 +242,27 @@ a {
     padding: 1.5rem;
     line-height: 1.2;
   }
+
+  .q-stepper--horizontal .q-stepper__step-inner {
+    padding: 12px;
+  }
 }
 @media (max-width: 500px) {
   .flexer {
     display: flex;
     flex-direction: column-reverse;
+  }
+
+  .q-toolbar {
+    padding: 5px 10px 5px 0;
+  }
+
+  .q-tab-panel {
+    padding: 5px;
+  }
+
+  .style {
+    padding: 0 !important;
   }
 
   .sign {
@@ -253,6 +279,10 @@ a {
 
   .row_Nfts {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .q-stepper__header--alternative-labels .q-stepper__tab {
+    padding: 10px;
   }
 }
 @media (max-width: 310px) {

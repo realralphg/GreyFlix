@@ -22,7 +22,7 @@
           class="q-ma-xs"
         />
 
-        <q-input
+        <!-- <q-input
           outlined
           dense
           debounce="300"
@@ -32,7 +32,7 @@
           <template v-slot:append>
             <q-icon name="search" />
           </template>
-        </q-input>
+        </q-input> -->
 
         <q-btn
           flat
@@ -133,7 +133,7 @@
             flat
             dense
             icon="close"
-            class="float-right"
+            class="float-right close"
             color="grey-8"
             v-close-popup
           ></q-btn>
@@ -146,7 +146,7 @@
           class="q-gutter-md"
           ref="fruitbayForm"
         >
-          <div class="row q-gutter-sm">
+          <div class="row mobile_set q-gutter-sm">
             <div class="col">
               <q-item-label class="q-pb-xs">Image</q-item-label>
 
@@ -175,7 +175,7 @@
             </div>
           </div>
 
-          <div class="row q-gutter-sm">
+          <div class="row mobile_set q-gutter-sm">
             <div class="col">
               <q-item-label class="q-pb-xs">Title</q-item-label>
               <q-input
@@ -383,7 +383,7 @@ export default {
       this.title = "";
       this.chapter_id = "";
       this.content_id = "";
-      this.image = "";
+      this.image = null;
       this.description = "";
     },
     createtitle(e) {
@@ -590,5 +590,11 @@ select {
   border: 1px solid #aaa9a9;
   width: 100%;
   padding: 0.6rem 0.5rem;
+}
+
+@media (max-width: 800px) {
+  .mobile_set {
+    flex-direction: column;
+  }
 }
 </style>

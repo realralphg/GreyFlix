@@ -22,7 +22,7 @@
           class="q-ma-xs"
         />
 
-        <q-input
+        <!-- <q-input
           outlined
           dense
           debounce="300"
@@ -32,7 +32,7 @@
           <template v-slot:append>
             <q-icon name="search" />
           </template>
-        </q-input>
+        </q-input> -->
 
         <q-btn
           flat
@@ -133,7 +133,7 @@
             flat
             dense
             icon="close"
-            class="float-right"
+            class="float-right close"
             color="grey-8"
             v-close-popup
           ></q-btn>
@@ -156,13 +156,9 @@
           :done="step > 1"
         >
           <q-card-section class="q-pt-none">
-            <q-form
-              @submit.prevent="createEventTicket"
-              class="q-gutter-md"
-              ref="fruitbayForm"
-            >
+            <q-form @submit.prevent="createEventTicket" class="q-gutter-md">
               <!-- <p class="text-weight-bold">Event Information</p> -->
-              <div class="row q-gutter-sm">
+              <div class="row mobile_set q-gutter-sm">
                 <div class="col">
                   <q-item-label class="q-pb-xs">Ticket Name</q-item-label>
                   <q-input
@@ -177,7 +173,7 @@
                 </div>
               </div>
 
-              <div class="row q-gutter-sm">
+              <div class="row mobile_set q-gutter-sm">
                 <div class="col">
                   <q-item-label class="q-pb-xs">Ticket Price</q-item-label>
                   <q-input
@@ -192,7 +188,7 @@
                   </div>
                 </div>
               </div>
-              <div class="row q-gutter-sm">
+              <div class="row mobile_set q-gutter-sm">
                 <div class="col">
                   <q-item-label class="q-pb-xs">Max Per Order</q-item-label>
                   <q-input
@@ -665,5 +661,11 @@ select {
   border: 1px solid #aaa9a9;
   width: 100%;
   padding: 0.6rem 0.5rem;
+}
+
+@media (max-width: 800px) {
+  .mobile_set {
+    flex-direction: column;
+  }
 }
 </style>

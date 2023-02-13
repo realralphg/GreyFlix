@@ -25,6 +25,7 @@
           Share and enjoy contents with friends and family in a unique and
           valuable manner.
         </p>
+        <p class="coming_soon">Coming soon</p>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <img src="/images/landing/2.png" alt="" />
@@ -52,7 +53,7 @@
         <img src="/images/landing/7.png" alt="" />
       </div>
     </div>
-    <div class="row flexer justify-between items-center">
+    <!-- <div class="row flexer justify-between items-center">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <img src="/images/landing/4.png" alt="" />
       </div>
@@ -62,13 +63,14 @@
           technologies.
         </p>
       </div>
-    </div>
+    </div> -->
     <div class="row justify-between items-center">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <p class="text-white text-weight-bold">
           Experience historical monuments and artifacts first hand in our VR
           collections.
         </p>
+        <p class="coming_soon">Coming soon</p>
       </div>
 
       <div class="col-md-6 col-sm-12 col-xs-12">
@@ -107,5 +109,22 @@ div {
 small {
   font-weight: 500;
   font-size: 0.75rem;
+}
+
+.coming_soon {
+  background: red;
+  opacity: 0.5;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 0 10px;
+  width: fit-content;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 500px) {
+  p {
+    font-size: 25px;
+    line-height: 30px;
+  }
 }
 </style>

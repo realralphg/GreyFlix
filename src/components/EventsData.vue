@@ -21,8 +21,8 @@
         <div class="artists">
           <div class="">
             <div class="row items-center justify-between">
-              <p>Start Date: {{ data.start_date }}</p>
-              <p>End Date: {{ data.end_date }}</p>
+              <p class="text-accent">Start Date: {{ data.start_date }}</p>
+              <p class="text-accent">End Date: {{ data.end_date }}</p>
             </div>
 
             <p>
@@ -70,8 +70,9 @@ p {
   background: #000;
   position: relative;
   border-radius: 7.24324px;
-  height: 400px;
+  height: 360px;
   width: 100%;
+  overflow: hidden;
   margin: 1rem auto;
 }
 
@@ -141,6 +142,7 @@ p {
   padding: 0.2rem 0.7rem;
   font-size: 14px;
   font-weight: 700;
+  /* max-width: 200px; */
 }
 
 .row_Nfts {
@@ -162,13 +164,15 @@ p {
     max-width: 90%;
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 800px) {
   .nft__section {
     padding: 3rem 1rem 5rem;
+    gap: 2rem;
+    max-width: 100%;
   }
 
   .row_Nfts {
-    gap: 5rem;
+    gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }

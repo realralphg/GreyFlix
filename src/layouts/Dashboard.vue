@@ -82,7 +82,7 @@
       class="bg-secondary"
       show-if-above
       :width="250"
-      :breakpoint="400"
+      :breakpoint="800"
     >
       <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px">
         <q-list padding>
