@@ -3,7 +3,7 @@
     <div class="hero__details">
       <div class="heading">Welcome to Rabitz</div>
       <p class="smaller__heading">Explore contents and earn on the go!</p>
-      <div class="input__wrap">
+      <!-- <div class="input__wrap">
         <div class="input">
           <div class="left">
             <i class="ri-search-line"></i>
@@ -12,7 +12,7 @@
 
           <q-btn no-caps class="bg-red search text-white"> Search </q-btn>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header class="bg-black" elevated>
-      <q-toolbar class="container justify-between">
+      <q-toolbar class="container q-pa-xs justify-between">
         <div class="logo">
           <img src="/images/logo.png" alt="" />
         </div>
@@ -155,6 +155,11 @@ export default defineComponent({
 @media (max-width: 600px) {
   .nav__toggler {
     display: block;
+  }
+}
+@media (max-width: 380px) {
+  .logo img {
+    width: 80px;
   }
 }
 </style>
