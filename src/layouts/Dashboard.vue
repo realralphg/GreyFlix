@@ -106,7 +106,10 @@
         src="https://cdn.quasar.dev/img/material.png"
         style="height: 150px"
       >
-        <div class="absolute-bottom bg-transparent">
+        <div
+          v-if="this.$store.auth.userDetails === []"
+          class="absolute-bottom bg-transparent"
+        >
           <q-avatar size="56px" class="q-mb-sm">
             <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
           </q-avatar>

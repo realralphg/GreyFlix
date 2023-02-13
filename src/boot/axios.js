@@ -110,7 +110,7 @@ export default boot(async ({ app, router, redirect }) => {
       // Save the current page and redirect the user to the login page
       store.bootstrap.setLostPage(to.name);
       helpers.notify("You need to log in to view page", "error");
-      return router.replace({ name: "auth.login" });
+      return router.replace({ name: "login" });
     } else if (to.meta.requireGuest && store.auth.token) {
       // The user is currently loggedin so redirect them from the authentication pages
       return redirect({

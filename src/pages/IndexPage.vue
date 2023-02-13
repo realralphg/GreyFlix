@@ -14,7 +14,7 @@
       :largeRow="largeRow"
       name="Animated Movies"
     /> -->
-    <NFTs :nfts="Nfts" />
+    <!-- <NFTs :nfts="Nfts" /> -->
     <!-- <Vr :vrs="virtualR" /> -->
     <Footer />
   </q-page>

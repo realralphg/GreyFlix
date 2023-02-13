@@ -77,12 +77,7 @@
                 >
                   <q-item-section>Sign Out</q-item-section>
                 </q-item>
-                <q-item
-                  v-else
-                  :to="{ name: 'home.login' }"
-                  clickable
-                  v-close-popup
-                >
+                <q-item v-else :to="{ name: 'login' }" clickable v-close-popup>
                   <q-item-section>Sign In</q-item-section>
                 </q-item>
               </q-list>

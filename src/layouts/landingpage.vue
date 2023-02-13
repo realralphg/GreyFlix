@@ -7,7 +7,7 @@
         </div>
 
         <div class="right">
-          <div class="connect">
+          <div class="connect q-gutter-md">
             <q-btn
               :to="
                 $router.currentRoute.value.path === '/login'
@@ -22,6 +22,14 @@
                   ? "Sign Up"
                   : "Login"
               }}
+            </q-btn>
+
+            <q-btn
+              :to="{ name: 'home' }"
+              no-caps
+              class="sign q-pa-sm text-white"
+            >
+              Home
             </q-btn>
           </div>
 

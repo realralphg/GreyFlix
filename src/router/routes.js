@@ -19,6 +19,9 @@ const routes = [
   {
     path: '/dashboard',
     component: () => import('layouts/Dashboard.vue'),
+    meta: {
+      requireAuth: true,
+    },
     children: [
       { path: '/user/dashboard', component: () => import('pages/Dashboard/Dashboard.vue'),name:'dashboard' },
       { path: '/user/Ticketing', component: () => import('pages/Dashboard/Ticketing.vue'), name:'Ticketing' },

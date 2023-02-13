@@ -155,6 +155,13 @@ p {
 .badge {
   width: 35px !important;
 }
+@media (min-width: 1200px) {
+  .row_Nfts {
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    max-width: 90%;
+  }
+}
 @media (max-width: 500px) {
   .nft__section {
     padding: 3rem 1rem 5rem;
