@@ -48,7 +48,7 @@
           <q-avatar>
             <img src="https://cdn.quasar.dev/img/avatar.png" />
           </q-avatar>
-          <q-btn label="Account" color="red">
+          <q-btn label="Account" class="account_btn" color="red">
             <q-menu class="menu">
               <q-list style="min-width: 120px">
                 <q-item
@@ -189,6 +189,9 @@ i {
 
   .nav__links {
     display: none;
+  }
+  .account_btn {
+    padding: 4px 8px;
   }
 }
 @media (max-width: 380px) {

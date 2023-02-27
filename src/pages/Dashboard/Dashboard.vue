@@ -29,7 +29,7 @@
             <Series />
           </q-tab-panel>
           <q-tab-panel name="musicstories">
-            <Musicstories />
+            <MusicSto />
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -40,7 +40,7 @@
 <script>
 import { ref } from "vue";
 import Categories from "src/components/dashboard/Categories.vue";
-import Musicstories from "src/components/dashboard/Musicstories.vue";
+import MusicSto from "src/components/dashboard/MusicSto.vue";
 import Series from "src/components/dashboard/Series.vue";
 
 export default {
@@ -49,6 +49,6 @@ export default {
       tab: ref("category"),
     };
   },
-  components: { Categories, Musicstories, Series },
+  components: { Categories, MusicSto, Series },
 };
 </script>

@@ -20,20 +20,20 @@
               {{
                 $router.currentRoute.value.path === "/login"
                   ? "Sign Up"
-                  : "Login"
+                  : "Sign In"
               }}
             </q-btn>
 
-            <q-btn
+            <!-- <q-btn
               :to="{ name: 'home' }"
               no-caps
               class="sign q-pa-sm text-white"
             >
               Home
-            </q-btn>
+            </q-btn> -->
           </div>
 
-          <q-btn
+          <!-- <q-btn
             flat
             dense
             round
@@ -41,7 +41,7 @@
             aria-label="Menu"
             class="nav__toggler"
             @click="toggleLeftDrawer"
-          />
+          /> -->
         </div>
       </q-toolbar>
     </q-header>

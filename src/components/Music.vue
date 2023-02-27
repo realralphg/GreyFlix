@@ -27,7 +27,7 @@
             <!-- <Playermix :playingMusic="music" :music="music.stream" /> -->
           </div>
         </div>
-        <p class="q-pa-sm">{{ music.info }}</p>
+        <p class="q-pa-sm info">{{ music.info }}</p>
       </div>
     </div>
   </div>
@@ -58,6 +58,7 @@ p {
   font-weight: 700;
   font-size: 15.8315px;
   line-height: 24px;
+
   color: #ffffff;
 }
 
@@ -97,5 +98,8 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+p.info {
+  margin-top: 1rem;
 }
 </style>

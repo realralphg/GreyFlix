@@ -7,6 +7,7 @@
       :largeRow="largeRow"
       name="Audio Stories"
     />
+
     <Music :musics="audios" />
     <EventsData :datas="data" />
     <!-- <Animations
@@ -24,6 +25,7 @@
 import { defineComponent } from "vue";
 import Hero from "../components/Hero.vue";
 import Watch from "../components/Watch.vue";
+// import Watching from "../components/Watching.vue";
 import Music from "../components/Music.vue";
 import NFTs from "../components/NFTs.vue";
 import Animations from "../components/Animations.vue";
@@ -41,15 +43,19 @@ export default defineComponent({
     Vr,
     Footer,
     EventsData,
+    // Watching,
   },
   data() {
     return {
       movies: [],
       trendingMovies: [],
       largeRow: true,
+      big_skeleton: null,
       skeleton: true,
       audios: [],
+      ourMangas: false,
       data: [],
+      musics: [],
       musicData: [
         {
           id: 1,
@@ -241,6 +247,7 @@ export default defineComponent({
       this.$api.get(`/audio/stories`).then((resp) => {
         console.log(resp);
         this.audios = resp.data.data;
+        this.musics = resp.data.data;
         this.skeleton = false;
       });
     },

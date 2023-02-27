@@ -70,7 +70,7 @@ p {
   background: #000;
   position: relative;
   border-radius: 7.24324px;
-  height: 360px;
+  min-height: 360px;
   width: 100%;
   overflow: hidden;
   margin: 1rem auto;

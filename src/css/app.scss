@@ -109,10 +109,6 @@ img {
   font-size: 17px;
 }
 
-// .auth .q-field__native {
-//   color: #fff;
-// }
-
 .vendor_onboard .q-field__native {
   color: black !important;
 }
@@ -154,9 +150,9 @@ a {
   cursor: pointer;
 }
 
-.row-poster:hover {
-  transform: scale(1.1);
-}
+// .row-poster:hover {
+//   transform: scale(1.1);
+// }
 
 .large-poster {
   max-height: 10rem;
@@ -164,9 +160,9 @@ a {
   transition: transform 480ms;
 }
 
-.large-poster:hover {
-  transform: scale(1.12);
-}
+// .large-poster:hover {
+//   transform: scale(1.12);
+// }
 
 .head {
   border-left: 6px solid #db6c0d;
@@ -217,6 +213,13 @@ a {
   top: 5px;
 }
 
+@media (min-width: 1440px) {
+  .q-header .q-tab__content,
+  .q-footer .q-tab__content {
+    min-width: 60px !important;
+  }
+}
+
 @media (max-width: 1200px) {
   .heading {
     font-size: 70px;
@@ -254,7 +257,7 @@ a {
   }
 
   .q-toolbar {
-    padding: 5px 10px 5px 0;
+    padding: 5px 0px 5px 0;
   }
 
   .q-tab-panel {

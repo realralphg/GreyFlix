@@ -263,6 +263,11 @@ export default {
     this.changeSong();
     this.audio.loop = false;
   },
+
+  created() {
+    let params = this.$router.currentRoute.value.params;
+    this.getContent(params.slug);
+  },
   methods: {
     getContent(slug) {
       this.loading = true;
