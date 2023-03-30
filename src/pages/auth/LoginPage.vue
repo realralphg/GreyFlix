@@ -2,7 +2,7 @@
   <q-page class="page">
     <div class="wrapper">
       <div class="login">
-        <div class="header">Get Reading....</div>
+        <div class="header">Start Listening....</div>
 
         <div class="short">Sign in with email</div>
 
@@ -12,6 +12,7 @@
               <input
                 v-model="form.email"
                 class="det_inp"
+                name="email"
                 placeholder="Email"
                 type="email"
                 required
@@ -26,6 +27,7 @@
                 class="det_inp"
                 placeholder="Password"
                 type="password"
+                name="password"
                 required
               />
 
@@ -98,7 +100,7 @@ export default {
         .then((response) => {
           console.log(response);
           this.$helper.notify(response.data.message, "success");
-          localStorage.setItem("token", resp.data.token);
+          localStorage.setItem("token", response.data.token);
           this.$store.auth.setUserDetails(response.data);
           this.$router.replace({ name: "home" });
           //   this.$store.auth.profileImg = response.data.data.avatar;
@@ -121,9 +123,9 @@ p {
   margin-bottom: 0;
 }
 .page {
-  background: url("/images/authbg.png") center center/cover no-repeat;
+  background: url("/images/netflixLanding.jpeg") center center/cover no-repeat;
   position: relative;
-  height: 100vh;
+  height: 80vh;
   overflow: hidden;
 }
 .page::before {
@@ -167,7 +169,7 @@ p {
 
   background: rgba(0, 0, 0, 0.5);
   padding: 3rem;
-  width: 50%;
+  width: 40%;
   z-index: 2;
 }
 
@@ -277,6 +279,10 @@ p {
     width: 80%;
     /* z-index: 100000; */
     padding: 1rem;
+  }
+
+  .page {
+    height: 100vh;
   }
 }
 @media (max-width: 400px) {

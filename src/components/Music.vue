@@ -9,12 +9,15 @@
         <div class="music_top">
           <router-link
             style="display: flex; width: 200px"
+            class=""
             :to="{
               name: 'audio.content',
               params: { contentid: music.id, slug: music.slug },
             }"
           >
-            <img class="" :src="music.cover_url" alt="" />
+            <div class="overlay">
+              <img class="" :src="music.cover_url" alt="" />
+            </div>
           </router-link>
 
           <div class="row justify-between items-center top_det">
@@ -27,7 +30,7 @@
             <!-- <Playermix :playingMusic="music" :music="music.stream" /> -->
           </div>
         </div>
-        <p class="q-pa-sm info">{{ music.info }}</p>
+        <!-- <p class="q-pa-sm info">{{ music.info }}</p> -->
       </div>
     </div>
   </div>
@@ -58,17 +61,34 @@ p {
   font-weight: 700;
   font-size: 15.8315px;
   line-height: 24px;
-
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 60%;
   color: #ffffff;
 }
 
+.overlay {
+  position: relative;
+}
+.overlay::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: rgba(21, 21, 21, 0.5);
+}
+.row-posts {
+  padding: 1.5rem 0;
+}
+/*
 .movie__section {
   margin: 2rem auto;
-}
+} */
 .music_hold {
   background: #151515;
   padding: 0.65rem;
-  height: 290px;
+  /* height: 270px; */
 }
 
 .music_hold img {
@@ -99,7 +119,7 @@ p {
   align-items: center;
   justify-content: center;
 }
-p.info {
+/* p.info {
   margin-top: 1rem;
-}
+} */
 </style>

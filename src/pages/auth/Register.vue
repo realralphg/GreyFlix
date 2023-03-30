@@ -2,7 +2,7 @@
   <q-page class="page">
     <div class="wrapper">
       <div class="login">
-        <div class="header">Get Access to Unlimited Manga....</div>
+        <div class="header">Get Access to Unlimited Stories and Music....</div>
 
         <div class="short">Sign up with email</div>
 
@@ -14,10 +14,53 @@
           >
             <div class="inp">
               <input
-                v-model="form.email"
+                v-model="data.firstname"
                 class="det_inp"
-                placeholder="Email"
+                placeholder="Enter your first name"
+                type="text"
+                autocomplete="text"
+                name="firstname"
+              />
+
+              <div class="error" v-if="errors.email">
+                {{ errors.email[0] }}
+              </div>
+            </div>
+            <div class="inp">
+              <input
+                v-model="data.lastname"
+                class="det_inp"
+                placeholder="Enter your last name"
+                type="text"
+                name="lastname"
+                autocomplete="text"
+              />
+
+              <div class="error" v-if="errors.email">
+                {{ errors.email[0] }}
+              </div>
+            </div>
+            <div class="inp">
+              <input
+                v-model="data.phone"
+                class="det_inp"
+                placeholder="Enter your phone number"
+                type="tel"
+                name="phone"
+                autocomplete="phone"
+              />
+
+              <div class="error" v-if="errors.email">
+                {{ errors.email[0] }}
+              </div>
+            </div>
+            <div class="inp">
+              <input
+                v-model="data.email"
+                class="det_inp"
+                placeholder="Enter your email"
                 type="email"
+                name="email"
                 autocomplete="email"
               />
 
@@ -28,10 +71,11 @@
 
             <div class="inp">
               <input
-                v-model="form.password"
+                v-model="data.password"
                 class="det_inp"
                 placeholder="Password"
                 type="password"
+                name="password"
                 autocomplete="password"
               />
 
@@ -43,7 +87,7 @@
             <div class="inp">
               <input
                 class="det_inp"
-                v-model="form.password_confirmation"
+                v-model="data.password_confirmation"
                 placeholder="Confirm Password"
                 type="password"
                 autocomplete="password"
@@ -51,62 +95,6 @@
 
               <div class="error" v-if="errors.password_confirmation">
                 {{ errors.password_confirmation[0] }}
-              </div>
-            </div>
-
-            <div class="inp">
-              <input
-                class="det_inp"
-                v-model="form.username"
-                placeholder="Nickname/Username"
-                autocomplete="username"
-                type="text"
-              />
-
-              <div class="error" v-if="errors.username">
-                {{ errors.username[0] }}
-              </div>
-            </div>
-
-            <div class="inp q-mt-sm">
-              <q-input
-                v-model="form.dob"
-                filled
-                square
-                dense
-                label-color="white"
-                input-class="text-white"
-                bg-color="black"
-                style="z-index: 5000"
-                mask="date"
-                placeholder="Date of Birth"
-                label="Date of Birth"
-                :rules="['date']"
-              >
-                <template v-slot:append>
-                  <q-icon name="event" class="cursor-pointer text-white">
-                    <q-popup-proxy
-                      cover
-                      transition-show="scale"
-                      transition-hide="scale"
-                    >
-                      <q-date v-model="form.dob" mask="YYYY-MM-DD">
-                        <div class="row items-center justify-end">
-                          <q-btn
-                            v-close-popup
-                            label="Close"
-                            color="primary"
-                            flat
-                          />
-                        </div>
-                      </q-date>
-                    </q-popup-proxy>
-                  </q-icon>
-                </template>
-              </q-input>
-
-              <div class="error" v-if="errors.dob">
-                {{ errors.dob[0] }}
               </div>
             </div>
 
@@ -150,13 +138,7 @@ export default {
     return {
       errors: [],
       loading: false,
-      form: {
-        email: "",
-        password: "",
-        password_confirmation: "",
-        username: "",
-        dob: "",
-      },
+      data: {},
     };
   },
   methods: {
@@ -168,9 +150,9 @@ export default {
           this.loading = false;
           console.log(response.data);
           this.$store.auth.setUserDetails(response.data);
-          localStorage.setItem("token", resp.data.token);
+          localStorage.setItem("token", response.data.token);
           this.$helper.notify(response.data.message, "success");
-          this.$router.replace({ name: "subscribe" });
+          // this.$router.replace({ name: "subscribe" });
         })
         .catch((e) => {
           this.loading = false;
@@ -188,10 +170,10 @@ p {
   margin-bottom: 0;
 }
 .page {
-  background: url("/images/authbg.png") center center/cover no-repeat;
+  background: url("/images/netflixLanding.jpeg") center center/cover no-repeat;
   position: relative;
   overflow: hidden;
-  height: 100vh;
+  height: 80vh;
 }
 .page::before {
   content: "";
@@ -234,7 +216,7 @@ p {
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
   padding: 3rem;
-  width: 50%;
+  width: 40%;
   z-index: 1;
 }
 
@@ -341,6 +323,10 @@ input.q-input-custom.det_inp {
   .login {
     width: 80%;
     padding: 1rem;
+  }
+
+  .page {
+    height: 100vh;
   }
 }
 @media (max-width: 600px) {

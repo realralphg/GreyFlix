@@ -2,21 +2,32 @@
   <q-page class="page">
     <Hero />
     <Watch
+      :audios="this.$store.myauth.favourites"
+      :skeleton="skeleton"
+      :largeRow="largeRow"
+      name="Your Favourites"
+      type="audio"
+    />
+    <Watch
+      :audios="audios"
+      :skeleton="skeleton"
+      :largeRow="largeRow"
+      name="Latest Audio Stories"
+      type="audio"
+    />
+    <Watch
       :audios="audios"
       :skeleton="skeleton"
       :largeRow="largeRow"
       name="Audio Stories"
+      type="audio"
     />
 
     <Music :musics="audios" />
-    <EventsData :datas="data" />
-    <!-- <Animations
-      :movies="animations"
-      :largeRow="largeRow"
-      name="Animated Movies"
-    /> -->
-    <!-- <NFTs :nfts="Nfts" /> -->
-    <!-- <Vr :vrs="virtualR" /> -->
+    <!-- <EventsData :datas="data" /> -->
+
+    <Watch :datas="data" name="Events" type="event" />
+
     <Footer />
   </q-page>
 </template>
@@ -25,7 +36,6 @@
 import { defineComponent } from "vue";
 import Hero from "../components/Hero.vue";
 import Watch from "../components/Watch.vue";
-// import Watching from "../components/Watching.vue";
 import Music from "../components/Music.vue";
 import NFTs from "../components/NFTs.vue";
 import Animations from "../components/Animations.vue";
@@ -43,10 +53,10 @@ export default defineComponent({
     Vr,
     Footer,
     EventsData,
-    // Watching,
   },
   data() {
     return {
+      hover: false,
       movies: [],
       trendingMovies: [],
       largeRow: true,
@@ -245,7 +255,7 @@ export default defineComponent({
     getmusicstories() {
       this.skeleton = true;
       this.$api.get(`/audio/stories`).then((resp) => {
-        console.log(resp);
+        // console.log(resp);
         this.audios = resp.data.data;
         this.musics = resp.data.data;
         this.skeleton = false;
@@ -257,7 +267,7 @@ export default defineComponent({
       this.$api
         .get(`events`)
         .then(({ data }) => {
-          console.log("added", data);
+          // console.log("added", data);
           this.data = data.data;
           this.loading = false;
         })

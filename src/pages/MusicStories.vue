@@ -52,96 +52,46 @@ export default {
   data() {
     return {
       audios: [],
-      musicData: [
-        {
-          id: 1,
-          image: "/images/recent/1.jpg",
-          type: "Cool Sounds",
-          desc: "Listen to carefully selected sounds",
-        },
-        {
-          id: 2,
-          image: "/images/recent/2.jpg",
-          type: "Identity",
-          desc: "Listen to carefully selected sounds",
-        },
-        {
-          id: 3,
-          image: "/images/recent/3.jpg",
-          type: "Top 25",
-          desc: "Listen to carefully selected sounds",
-        },
-        {
-          id: 4,
-          image: "/images/recent/4.jpg",
-          type: "Throwback",
-          desc: "Listen to carefully selected sounds",
-        },
-        {
-          id: 5,
-          image: "/images/recent/5.jpg",
-          type: "Down Sounds",
-          desc: "Listen to carefully selected sounds",
-        },
-        {
-          id: 6,
-          image: "/images/recent/6.jpg",
-          type: "Down Sounds",
-          desc: "Listen to carefully selected sounds",
-        },
-        {
-          id: 7,
-          image: "/images/recent/7.jpg",
-          type: "Down Sounds",
-          desc: "Listen to carefully selected sounds",
-        },
-        {
-          id: 8,
-          image: "/images/recent/8.jpg",
-          type: "Down Sounds",
-          desc: "Listen to carefully selected sounds",
-        },
-      ],
 
       artistes: [
         {
           id: 1,
-          image: "/images/artworks/artist/1.png",
+          image: "/images/artworks/1.jpg",
           name: "Arya",
         },
         {
           id: 2,
-          image: "/images/artworks/artist/2.png",
+          image: "/images/artworks/2.jpg",
           name: "JKL",
         },
         {
           id: 3,
-          image: "/images/artworks/artist/3.png",
+          image: "/images/artworks/3.jpg",
           name: "Calipso",
         },
         {
           id: 4,
-          image: "/images/artworks/artist/4.png",
+          image: "/images/artworks/4.jpg",
           name: "Davis",
         },
         {
           id: 5,
-          image: "/images/artworks/artist/5.png",
+          image: "/images/artworks/5.jpg",
           name: "Ziggy",
         },
         {
           id: 6,
-          image: "/images/artworks/artist/6.png",
+          image: "/images/artworks/6.jpg",
           name: "Greg Marx",
         },
         {
           id: 7,
-          image: "/images/artworks/artist/7.png",
+          image: "/images/artworks/7.jpg",
           name: "Laura",
         },
         {
           id: 8,
-          image: "/images/artworks/artist/8s.png",
+          image: "/images/artworks/8.jpg",
           name: "Greg Marx Jnr",
         },
       ],

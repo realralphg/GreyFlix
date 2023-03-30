@@ -1,7 +1,7 @@
 <template>
   <div class="card-banner-icon">
     <!-- {{ playing }} -->
-    <q-btn v-if="playing" @click="play((playing = false))">
+    <q-btn class="player_btn" v-if="playing" @click="play((playing = false))">
       <i
         :class="playing === true ? 'fa-solid fa-pause' : 'fa-solid fa-play'"
       ></i>
@@ -101,6 +101,12 @@ export default {
 </script>
 
 <style scoped>
+.q-btn {
+  padding: 0;
+  color: #ffffff;
+  min-height: 0;
+}
+
 .q-btn::before {
   box-shadow: none;
 }
@@ -110,10 +116,10 @@ i {
   border: 0.979656px solid #ffffff;
   backdrop-filter: blur(8.82797px);
   border-radius: 91.6247px;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   font-weight: 700;
-  font-size: 15.8315px;
+  font-size: 12.8315px;
   display: flex;
   align-items: center;
   justify-content: center;

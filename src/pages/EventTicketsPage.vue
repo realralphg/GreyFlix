@@ -3,19 +3,7 @@
     <q-spinner-bars size="4rem" color="purple" />
   </div>
   <q-page class="page container">
-    <div class="row justify-between items-center">
-      <!-- <div class="col-md-6 col-sm-12 col-xs-12">
-        <h4 class="text-white text-weight-bold">
-          {{ data[0].event.name }}
-        </h4>
-        <p class="text-white text-weight-bold">
-          {{ data[0].event.description }}
-        </p>
-      </div>
-      <div class="col-md-6 col-sm-12 col-xs-12">
-        <img :src="data[0].event.category.image_url" alt="" />
-      </div> -->
-    </div>
+    <div class="row justify-between items-center"></div>
 
     <EventsTickets :datas="data" />
     <Footer />

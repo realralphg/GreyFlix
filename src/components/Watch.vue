@@ -1,100 +1,75 @@
 <template>
   <div class="movie__section container">
-    <div style="font-size: 30px" class="text-white head q-pa-sm">
+    <div
+      style="font-size: 25px"
+      class="text-white text-weight-bold head q-pa-sm"
+    >
       {{ name }}
     </div>
-    <div class="row-posts">
-      <div v-if="skeleton" class="skeleton no-wrap row items-center">
-        <q-skeleton v-for="n in 5" :key="n" width="150px" height="200px" />
-      </div>
-      <div
-        v-for="audio in audios"
-        :key="audio.id"
-        :class="
-          largeRow ? 'large-poster poster_wrap' : 'row-poster poster_wrap'
-        "
-      >
-        <router-link
-          style="display: flex; width: 100%"
-          class="poster"
-          :to="{
-            name: 'audio.content',
-            params: { contentid: audio.id, slug: audio.slug },
-          }"
-        >
-          <img :src="audio.cover_url" alt="" />
 
-          <div class="drop_wrap">
-            <img :src="audio.cover_url" alt="" />
-            <div class="btn_wraps">
-              <div class="left">
-                <q-btn round color="primary" icon="shopping_cart" />
-                <q-btn round color="secondary" icon="navigation" />
-                <q-btn
-                  round
-                  color="amber"
-                  glossy
-                  text-color="black"
-                  icon="layers_clear"
-                />
-              </div>
-
-              <div class="right">
-                <q-btn round color="black" icon="my_location" />
-              </div>
-            </div>
-            <p>97% Match <span class="square">18+</span> 2 Seasons</p>
+    <div v-if="type === 'audio'" class="rowItem">
+      <div v-for="audio in audios" :key="audio.id" class="audio_hold">
+        <div class="audio_top">
+          <div>
+            <Audio :audio="audio" />
           </div>
-
-          <!-- <img src="/images/recent/2.jpg" alt="" /> -->
-        </router-link>
+        </div>
+      </div>
+    </div>
+    <!-- {{ type }} -->
+    <div v-if="type === 'event'" class="rowItem">
+      <div v-for="data in datas" :key="data.id" class="audio_hold">
+        <div class="audio_top">
+          <div>
+            <Event :eventdata="data" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// :src="audio.cover_url ? audio.cover_url : '/images/recent/2.jpg'"
-
+import Audio from "./Audio.vue";
+import Event from "./Event.vue";
 export default {
-  props: ["audios", "largeRow", "name", "skeleton"],
+  props: ["audios", "name", "type", "datas"],
+
+  components: {
+    Audio,
+    Event,
+  },
 };
 </script>
 
 <style scoped>
-.poster_wrap {
+.movie__section {
   position: relative;
 }
-
-.poster {
-  /* display: inline-block; */
-  height: auto;
-  padding: 2px;
-  cursor: pointer;
-}
-.drop_wrap {
-  visibility: hidden;
-  transition: all 0.5s ease-in-out;
-  position: absolute;
-  display: block;
-  bottom: 0px;
-  left: 0px;
-  z-index: 1;
-  width: 100%;
-  height: auto;
-  padding: 10px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
-  opacity: 0;
-  background: brown;
+p {
+  margin-bottom: 0;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15.8315px;
+  line-height: 24px;
+  color: #ffffff;
 }
 
-.drop_wrap .btn_wraps {
+.rowItem {
   display: flex;
-  justify-content: space-between;
+  gap: 5rem;
+  align-items: center;
+  overflow-x: scroll;
+  height: 250px;
+  /* overflow-y: hidden; */
+  padding: 3rem 0 10rem;
+  /* margin-bottom: 12rem; */
+}
+.rowItem::-webkit-scrollbar {
+  display: none;
 }
 
-.poster:hover .drop_wrap {
-  visibility: visible;
-  transform: scale(1.3);
+.head {
+  position: absolute;
 }
 </style>

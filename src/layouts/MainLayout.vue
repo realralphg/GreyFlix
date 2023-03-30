@@ -53,12 +53,20 @@
               <q-list style="min-width: 120px">
                 <q-item
                   v-if="this.$store.auth.token"
+                  :to="{ name: 'BecomeCreator' }"
+                  clickable
+                  v-close-popup
+                >
+                  <q-item-section>Become a creator</q-item-section>
+                </q-item>
+                <!-- <q-item
+                  v-if="this.$store.auth.token"
                   :to="{ name: 'dashboard' }"
                   clickable
                   v-close-popup
                 >
                   <q-item-section>My Account</q-item-section>
-                </q-item>
+                </q-item> -->
                 <!-- <q-item
                   v-if="this.$store.auth.token"
                   :to="{ name: 'help' }"

@@ -3,8 +3,8 @@
     <header class="top_heroPage border_btm">
       <div class="hold">
         <h1>
-          Unlimited movies, TV <br />
-          shows, and more.
+          Unlimited stories, music <br />
+          and more.
         </h1>
         <h2 class="bigger">Watch anywhere. Cancel anytime.</h2>
 
@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <!-- <div class="container">
       <div class="row q-mt-xl q-pt-xl border_btm justify-between items-center">
         <div class="col-md-6 col-sm-6 col-xs-12">
           <p class="text-white text-weight-bold">
@@ -52,11 +52,10 @@
           <p class="coming_soon">Coming soon</p>
         </div>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <!-- <img src="/images/landing.m4v" alt="" /> -->
           <img src="/images/landing/2.png" alt="" />
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="container">
       <div class="row flexer border_btm justify-between items-center">
@@ -95,7 +94,7 @@
         </p>
       </div>
     </div> -->
-    <div class="container">
+    <!-- <div class="container">
       <div class="row justify-between items-center">
         <div class="col-md-6 col-sm-6 col-xs-12">
           <img src="/images/landing/5.png" alt="" />
@@ -108,7 +107,7 @@
           <p class="coming_soon">Coming soon</p>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <Footer />
   </q-page>

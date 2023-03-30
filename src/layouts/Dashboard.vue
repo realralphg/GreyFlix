@@ -98,12 +98,12 @@
             </q-item-section>
             <q-item-section class="text-white"> Ticketing </q-item-section>
           </q-item>
-          <q-item :to="{ name: 'verify' }" clickable v-ripple>
+          <!-- <q-item :to="{ name: 'verify' }" clickable v-ripple>
             <q-item-section avatar>
               <q-icon name="fa-solid fa-eye" />
             </q-item-section>
             <q-item-section class="text-white"> Verify Account </q-item-section>
-          </q-item>
+          </q-item> -->
         </q-list>
       </q-scroll-area>
 
