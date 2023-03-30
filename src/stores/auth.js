@@ -5,6 +5,7 @@ export const useMyAuthStore = defineStore("myauth", {
   state: () => ({
     token: "",
     userDetails: null,
+    subscribed: false,
     ticket: {},
     loggedPay: {},
     favourites: [],

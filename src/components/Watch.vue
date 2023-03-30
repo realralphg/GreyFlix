@@ -61,9 +61,7 @@ p {
   align-items: center;
   overflow-x: scroll;
   height: 250px;
-  /* overflow-y: hidden; */
   padding: 3rem 0 10rem;
-  /* margin-bottom: 12rem; */
 }
 .rowItem::-webkit-scrollbar {
   display: none;
@@ -71,5 +69,11 @@ p {
 
 .head {
   position: absolute;
+}
+
+@media (max-width: 500px) {
+  .rowItem {
+    gap: 2rem;
+  }
 }
 </style>

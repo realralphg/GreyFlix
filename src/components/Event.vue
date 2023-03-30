@@ -196,4 +196,9 @@ p {
   border: 1px solid #fff;
   padding: 0 5px;
 }
+@media (max-width: 500px) {
+  .items {
+    width: 200px;
+  }
+}
 </style>

@@ -24,7 +24,7 @@
                 <!-- <button>
                   <i class="fa fa-play"></i>
                 </button> -->
-                <button><i class="fa fa-plus"></i></button>
+                <button @click="subscribe"><i class="fa fa-plus"></i></button>
                 <i
                   v-if="audio.fav === 'yes'"
                   class="fa-solid text-red fa-heart"
@@ -79,6 +79,17 @@ export default {
   // mounted() {
   //   console.log(this.$store.myauth.favourites);
   // },
+
+  methods: {
+    subscribe() {
+      this.$store.myauth.subscribed = true;
+      this.$q.notify({
+        message: "You have now successfully subscribed",
+        color: "green",
+        position: "top",
+      });
+    },
+  },
 };
 </script>
 
@@ -209,5 +220,11 @@ p {
 .detail-rating p:nth-child(2) {
   border: 1px solid #fff;
   padding: 0 5px;
+}
+
+@media (max-width: 500px) {
+  .items {
+    width: 200px;
+  }
 }
 </style>

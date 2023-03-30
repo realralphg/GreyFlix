@@ -34,7 +34,7 @@
         </div>
 
         <div class="right">
-          <q-btn
+          <!-- <q-btn
             style="height: 40px; width: 40px"
             dense
             color="purple"
@@ -43,7 +43,7 @@
             class="q-ml-md"
           >
             <q-badge color="red" floating>4</q-badge>
-          </q-btn>
+          </q-btn> -->
 
           <q-avatar>
             <img src="https://cdn.quasar.dev/img/avatar.png" />

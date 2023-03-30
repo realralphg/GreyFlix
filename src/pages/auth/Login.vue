@@ -101,6 +101,12 @@ export default {
         .catch(({ response }) => {
           this.loading = false;
           this.errors = response.errors;
+          this.$q.notify({
+            message: "Invalid user details",
+            color: "red",
+            position: "top",
+            timeout: 3000,
+          });
           setTimeout(() => {
             this.errors = [];
           }, 7000);

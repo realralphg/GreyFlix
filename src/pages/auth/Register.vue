@@ -107,7 +107,9 @@
         <div class="want text-center">
           <p>
             Want access?
-            <span class="text-weight-bold">Get unlimited manga now</span>
+            <span class="text-weight-bold"
+              >Get access to unlimited stories now</span
+            >
           </p>
           <p>
             Already have an account?
@@ -119,7 +121,7 @@
 
         <div class="privacy">
           <p class="text-center">
-            By using MangaClub you agree to its <br />
+            By using Rabitz you agree to its <br />
             <a href="#" class="text-weight-bold text-white">
               Terms of Service</a
             >
@@ -145,20 +147,28 @@ export default {
     register() {
       this.loading = true;
       this.$api
-        .post("register", this.form)
+        .post("register", this.data)
         .then((response) => {
           this.loading = false;
-          console.log(response.data);
+          // console.log(response.data);
           this.$store.auth.setUserDetails(response.data);
           localStorage.setItem("token", response.data.token);
           this.$helper.notify(response.data.message, "success");
-          // this.$router.replace({ name: "subscribe" });
+          this.$router.replace({ name: "home" });
         })
-        .catch((e) => {
+        .catch((response) => {
           this.loading = false;
-          let error = this.$plugins.reader.error(e);
-          this.errors = error.errors || {};
-          this.$helper.notify(error.message || error, error.status || "error");
+          // console.log(response);
+          // let error = this.$plugins.reader.error(e);
+          // this.errors = e.errors || {};
+          this.$q.notify({
+            message:
+              "Invalid user details, your password must be up to 8 characters",
+            color: "red",
+            position: "top",
+            timeout: 3000,
+          });
+          // this.$helper.notify(e.message || e, error.status || "error");
         });
     },
   },

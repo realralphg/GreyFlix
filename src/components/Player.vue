@@ -21,14 +21,15 @@
             <div class="text-grey">{{ playingMusic.info }}</div>
           </div>
           <q-space />
-          <q-btn flat round icon="fast_rewind" />
+          <q-btn text-color="black" flat round icon="fast_rewind" />
           <q-btn
             @click="play((playing = false))"
             flat
             round
+            text-color="black"
             :icon="playing === true ? 'fa-solid fa-pause' : 'fa-solid fa-play'"
           />
-          <q-btn flat round icon="fast_forward" />
+          <q-btn text-color="black" flat round icon="fast_forward" />
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -62,40 +63,34 @@ export default {
     play(playing) {
       console.log(playing);
       var stream = this.music;
-      var player = new Howl({
-        src: stream,
-        html5: true,
-        autoplay: false,
-        loop: false,
-        volume: 0.7,
-        preload: false,
-      });
+
+      if (!this.$store.myauth.subscribed) {
+        this.$q.notify({
+          message: "You need to be subscribed to view this content",
+          color: "red",
+        });
+      } else {
+        this.playing = true;
+        var player = new Howl({
+          src: stream,
+          html5: true,
+          autoplay: false,
+          loop: false,
+          volume: 0.7,
+          preload: false,
+        });
+      }
       if (playing) {
         player.play();
-        console.log("play");
+        // console.log("play");
         this.open("bottom");
       } else {
         // player.pause();
         this.dialog = false;
         Howler.unload();
-        console.log("paused >>>");
+        // console.log("paused >>>");
       }
     },
-    // pause(playing) {
-    //   playing = false;
-    //   var stream = this.music;
-    //   var player = new Howl({
-    //     src: stream,
-    //     html5: true,
-    //     autoplay: false,
-    //     loop: false,
-    //     volume: 0.7,
-    //     preload: false,
-    //   });
-    //   player.stop();
-    //   // Howler.unload();
-    //   this.open("bottom");
-    // },
   },
 };
 </script>

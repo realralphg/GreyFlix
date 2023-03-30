@@ -51,7 +51,9 @@
         <div class="want text-center">
           <p>
             Want access?
-            <span class="text-weight-bold">Get unlimited manga now</span>
+            <span class="text-weight-bold"
+              >Get unlimited access to stories now</span
+            >
           </p>
           <p>
             <span>Don't have an account?</span>
@@ -63,7 +65,7 @@
 
         <div class="privacy">
           <p class="text-center">
-            By using MangaClub you agree to its <br />
+            By using Rabitz you agree to its <br />
             <span class="text-weight-bold"> Terms of Service</span> and
             <span class="text-weight-bold"> Privacy Policy</span>
           </p>
@@ -98,7 +100,7 @@ export default {
       this.$api
         .post("login", this.form)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           this.$helper.notify(response.data.message, "success");
           localStorage.setItem("token", response.data.token);
           this.$store.auth.setUserDetails(response.data);
@@ -111,6 +113,12 @@ export default {
           let error = this.$plugins.reader.error(e);
           this.errors = error.errors || {};
           this.$helper.notify(error.message || error, error.status || "error");
+          this.$q.notify({
+            message: "Invalid user details",
+            color: "red",
+            position: "top",
+            timeout: 3000,
+          });
           this.loading = false;
         });
     },
@@ -288,6 +296,7 @@ p {
 @media (max-width: 400px) {
   .login {
     width: 95%;
+    top: 40%;
     /* z-index: 100000; */
   }
 }

@@ -2,6 +2,7 @@
   <q-page class="page">
     <Hero />
     <Watch
+      v-if="this.$store.myauth.favourites.length"
       :audios="this.$store.myauth.favourites"
       :skeleton="skeleton"
       :largeRow="largeRow"
